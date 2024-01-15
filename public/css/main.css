@@ -1,0 +1,105 @@
+/**
+ * Autor: Valentin Andrei Culea
+ * Fecha: 07/12/2023
+ * Versión 1
+ */
+*{
+    font-family: 'Trebuchet MS', sans-serif;
+}
+main{
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 9em 1fr;
+}
+nav{
+    background-color: #03a8f405;
+    height: fit-content;
+    position: sticky;
+    top: 1em;
+    margin-top: 2em;
+    text-align: center;
+    border-radius: 1em;
+}
+nav ul{
+    margin: 0;
+    padding: 1em;
+}
+nav ul li{
+    list-style: none;
+    margin-bottom: 1em;
+}
+nav ul li a{
+    text-decoration: none;
+    color: #03A9F4;
+    font-weight: bold;
+}
+.pagina{
+    padding: 2em;
+}
+header, footer{
+    padding: 1em;
+    background-color: #03A9F4;
+    color: whitesmoke;
+    box-shadow: 0px 0px 5px #03A9F4;
+}
+footer{
+    padding: 4em;
+}
+.lista-tareas{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+}
+.tarea{
+    display: flex;
+    flex-flow: column;
+    gap: 1em;
+    background-color: bisque;
+    width: 250px;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.tarea-titulo{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.tarea p{
+    margin: 0;
+}
+.tarea a{
+    text-decoration: none;
+}
+.inicio-opciones ul{
+    list-style: none;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+}
+.inicio-opciones ul li{
+    padding: 2em;
+    border-radius: 5px;
+    font-size: 1.5em;
+    text-align: center;
+    box-shadow: 0px 0px 5px black;
+}
+.inicio-opciones ul li i{
+    font-size: 1.7em;
+}
+.inicio-opciones ul li:hover{
+    cursor: pointer;
+    background: black !important;
+    transition: .3s ease-in-out;
+}
+.inicio-opciones ul li a{
+    text-decoration: none;
+    color: white;
+}
+.text-azul{
+    color: #03A9F4 !important;
+}
