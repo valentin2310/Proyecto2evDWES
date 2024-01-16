@@ -18,19 +18,19 @@
                 <p><span class="fw-bold">Id factura: </span>{{ $tarea->id }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Estado: </span>{{ $tarea->estado }}</p>
+                <p><span class="fw-bold">Estado: </span>{{ $tarea->getEstado() }}</p>
             </div>
             <div class="col-md-12">
                 <p><span class="fw-bold">NIF facturador: </span>{{ $tarea->nif }}</p>
             </div>
             <div class="col-md-12">
-                <p><span class="fw-bold">Operario: </span>{{ $tarea->operario ?? 'Ninguno' }}</p>
+                <p><span class="fw-bold">Operario: </span>{{ $tarea->operario->nombre ?? 'Ninguno' }}</p>
             </div>
             <div class="col-md-12">
                 <p><span class="fw-bold">Descripción: </span>{{ $tarea->descripcion }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->created_at }}</p>
+                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->fecha_creacion }}</p>
             </div>
             <div class="col-md-6">
                 <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion ?? 'Ninguna' }}</p>
@@ -87,7 +87,7 @@
                 <p><span class="fw-bold">Dirección: </span>{{ $tarea->direccion ?? 'Sin dirección' }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Provincia: </span>{{ $tarea->provincia ?? 'Ninguna' }}</p>
+                <p><span class="fw-bold">Provincia: </span>{{ $tarea->provincia->nombre ?? 'Ninguna' }}</p>
             </div>
             <div class="col-md-6">
                 <p><span class="fw-bold">Población: </span>{{ $tarea->poblacion ?? 'Ninguna' }}</p>

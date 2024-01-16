@@ -35,7 +35,7 @@
                         <td>#{{ $item->id }}</td>
                         <td>{{ $item->nif }}</td>
                         <td>{{ $item->estado }}</td>
-                        <td>{{ $item->operario }}</td>
+                        <td>{{ $item->operario->nombre }}</td>
                         <td>{{ $item->descripcion }}</td>
                         <td>{{ $item->contacto }}</td>
                         <td>{{ $item->fecha_creacion }}</td>

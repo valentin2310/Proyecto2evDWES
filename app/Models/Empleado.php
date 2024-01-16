@@ -15,8 +15,19 @@ class Empleado extends Model
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
 
+    // Lista con los tipos de usuarios que hay en la aplicación
+    const TIPOS_USUARIOS = [
+        "ADMIN" => 0,
+        "OPERARIO" => 1
+    ];
+
     public function tareas(): HasMany
     {
         return $this->hasMany(Tarea::class, 'id_operario', 'id');
+    }
+
+    public static function getOperarios()
+    {
+        return self::where('tipo', Empleado::TIPOS_USUARIOS["OPERARIO"])->get();
     }
 }

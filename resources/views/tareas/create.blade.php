@@ -1,8 +1,8 @@
 <?php
 /**
- * Autor: Valentin Andrei Culea
- * Fecha: 07/12/2023
- * Versión 1
+ * @author: Valentin Andrei Culea
+ * @date: 15/01/2024
+ * @version 2
  */
 ?>
 @extends('layouts.plantilla')
@@ -16,19 +16,23 @@
     <h1>Añadir una tarea</h1>
         
     <form action="{{ route('tareas.store') }}" method="POST" class="form bg-dark text-white p-4 rounded">
+
+        @csrf
     
         <fieldset>
             <legend class="text-azul">Datos de la tarea</legend>
             <div class="row m-0 p-2">
+                <!-- Campo oculto con el valor del estado -->
+                <input type="hidden" name="estado" value="P">
                 <div class="col-md-5 mb-3">
-                    <label class="form-label">Estado:</label>
-                    <select class="form-select" disabled>
-                        @foreach ($optionsEstado as $key => $value)
-                        <option value="{{ $key }}" @selected($key == 'B')>{{ $value }}</option>
+                    <label class="form-label">Cliente:</label>
+                    <select class="form-select" name="id_cliente">
+                        @foreach ($listaClientes as $item)
+                        <option value="{{ $item->id }}" @selected(isset($request) && $item->id == $request['id_cliente'])>
+                            {{ $item->nombre }}
+                        </option>
                         @endforeach
                     </select>
-                    <!-- Campo oculto con el valor del estado -->
-                    <input type="hidden" name="estado" value="B">
                 </div>
                 <div class="col-md-7 mb-3">
                     <label class="form-label">Fecha realización:</label>
@@ -43,10 +47,10 @@
                 </div>
                 <div class="col-md-5 mb-3">
                     <label class="form-label">Operario:</label>
-                    <select class="form-select" name="operario">
+                    <select class="form-select" name="id_operario">
                         @foreach ($listaOperarios as $item)
-                        <option value="{{ $item->id }}" @selected(isset($request) && $item->id == $request['operario'])>
-                            {{ $item->usuario }}
+                        <option value="{{ $item->id }}" @selected(isset($request) && $item->id == $request['id_operario'])>
+                            {{ $item->nombre }}
                         </option>
                         @endforeach
                     </select>
@@ -127,9 +131,9 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Provincia:</label>
-                    <select name="provincia" class="form-select">
+                    <select name="id_provincia" class="form-select">
                         @foreach ($listaProvincias as $item)
-                            <option value="{{ $item->id }}">{{ $item->provincia }}</option>
+                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                         @endforeach
                     </select>
                 </div>

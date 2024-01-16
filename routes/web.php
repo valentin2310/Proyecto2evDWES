@@ -20,9 +20,10 @@ Route::get('/', HomeController::class)->name('home');
 Route::controller(TareaController::class)->group(function () {
     Route::get('tareas', 'index')->name('tareas.index');
 
-    /* Route::get('tareas/create', 'create')->name('tareas.create');
+    Route::get('tareas/create', 'create')->name('tareas.create');
     Route::post('tareas/create', 'store')->name('tareas.store');
-
+    
+    /* 
     Route::get('tareas/search', 'search')->name('tareas.search');
     */
 
