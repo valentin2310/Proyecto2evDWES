@@ -24,13 +24,13 @@
                 <p><span class="fw-bold">NIF facturador: </span>{{ $tarea->nif }}</p>
             </div>
             <div class="col-md-12">
-                <p><span class="fw-bold">Operario: </span>{{ $tarea->getOperario() ?? 'Ninguno' }}</p>
+                <p><span class="fw-bold">Operario: </span>{{ $tarea->operario ?? 'Ninguno' }}</p>
             </div>
             <div class="col-md-12">
                 <p><span class="fw-bold">Descripción: </span>{{ $tarea->descripcion }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->fecha_creacion }}</p>
+                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->created_at }}</p>
             </div>
             <div class="col-md-6">
                 <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion ?? 'Ninguna' }}</p>
@@ -41,7 +41,7 @@
     <section>
         <h1 class="text-azul"><i class="fa-solid fa-gear me-3"></i>Acciones</h1>
         <div class="px-4 py-2">
-            @if ($usuario->esAdmin())    
+            {{-- @if ($usuario->esAdmin())    
                 <button class="btn btn-dark fw-bold">
                     <a href="{{ route('tareas.edit', $tarea->id) }}" class="text-decoration-none text-warning">
                         <i class="fa-solid fa-pen me-2"></i>
@@ -61,7 +61,7 @@
                         Completar tarea
                     </a>
                 </button>
-            @endif
+            @endif --}}
         </div>
     </section>
 
@@ -121,7 +121,7 @@
         </div>
     </section>
 
-    <section>
+    {{-- <section>
         <h1 class="text-azul"><i class="fa-solid fa-image me-3"></i>Fotos del trabajo realizado</h1>
         <div class="px-4 py-2">
             @if (count($tarea->getImagenes()) > 0)
@@ -137,6 +137,6 @@
                 <p>No hay ninguna foto</p>
             @endif
         </div>
-    </section>
+    </section> --}}
     
 @endsection

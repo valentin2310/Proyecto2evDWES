@@ -10,4 +10,5 @@ class Provincia extends Model
     use HasFactory;
 
     protected $table = 'provincias';
+    public $timestamps = false;
 }

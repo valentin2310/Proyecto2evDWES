@@ -13,7 +13,7 @@
     <h1>Aquí se muestran todas las tareas</h1>
 
     <div class="info-busqueda pt-3">
-        <p class="fw-bold">Hay {{ $resultados }} resultados:</p>
+        <p class="fw-bold">Hay {{ count($tareas) }} resultados:</p>
     </div>
 
     <div class="table-responsive">
@@ -35,7 +35,7 @@
                         <td>#{{ $item->id }}</td>
                         <td>{{ $item->nif }}</td>
                         <td>{{ $item->estado }}</td>
-                        <td>{{ $item->getOperario() ?? 'Sin operario' }}</td>
+                        <td>{{ $item->operario }}</td>
                         <td>{{ $item->descripcion }}</td>
                         <td>{{ $item->contacto }}</td>
                         <td>{{ $item->fecha_creacion }}</td>
@@ -48,14 +48,14 @@
                             </button>
                             @if (isset($usuario) && $usuario->esAdmin())
                                 <button class="btn btn-dark" title="Modificar la tarea">
-                                    <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
+                                   {{--  <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
+                                    </a> --}}
+                                    <i class="fa-solid fa-pen"></i>
                                 </button>
                                 <button class="btn btn-dark" title="Eliminar la tarea">
-                                    <a href="{{ route('tareas.confirmacion', $item->id) }}" class="text-decoration-none text-danger">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
+                                   {{--  <a href="{{ route('tareas.confirmacion', $item->id) }}" class="text-decoration-none text-danger">
+                                    </a> --}}
+                                    <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             @endif
                         </td>
@@ -65,7 +65,7 @@
         </table>
     </div>
 
-    <div class="paginacion my-3 d-flex gap-3 align-items-center justify-content-center">
+    {{-- <div class="paginacion my-3 d-flex gap-3 align-items-center justify-content-center">
         @if ($page > 1)
             <button class="btn btn-dark"><a href="{{ route('tareas.index', ['page'=>$page-1]) }}" class="text-decoration-none text-white">Anterior</a></button>
         @else
@@ -79,6 +79,8 @@
         @else
             <button class="btn btn-dark" disabled>Siguiente</button>
         @endif
-    </div>
+    </div> --}}
+
+    {{ $tareas->links() }}
 
 @endsection
