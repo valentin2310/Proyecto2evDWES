@@ -28,50 +28,52 @@
                     <label class="form-label">Cliente:</label>
                     <select class="form-select" name="id_cliente">
                         @foreach ($listaClientes as $item)
-                        <option value="{{ $item->id }}" @selected(isset($request) && $item->id == $request['id_cliente'])>
+                        <option value="{{ $item->id }}" @selected($item->id == old('id_cliente'))>
                             {{ $item->nombre }}
                         </option>
                         @endforeach
                     </select>
+                    @error('id_cliente')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-7 mb-3">
                     <label class="form-label">Fecha realización:</label>
                     <input type="text" name="fecha_realizacion" class="form-control"
-                        @isset ($request)
-                            value="{{ $request['fecha_realizacion'] }}"
-                        @endisset
+                        value="{{ old('fecha_realizacion') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('fecha_realizacion'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('fecha_realizacion') }}</small>
-                    @endif
+                    @error('fecha_realizacion')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-5 mb-3">
                     <label class="form-label">Operario:</label>
                     <select class="form-select" name="id_operario">
                         @foreach ($listaOperarios as $item)
-                        <option value="{{ $item->id }}" @selected(isset($request) && $item->id == $request['id_operario'])>
+                        <option value="{{ $item->id }}" @selected($item->id == old('id_operario'))>
                             {{ $item->nombre }}
                         </option>
                         @endforeach
                     </select>
+                    @error('id_operario')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-7 mb-3">
                     <label class="form-label">NIF facturador</label>
                     <input type="text" name="nif" class="form-control"
-                        @if (isset($request))
-                            value="{{ $request['nif'] }}"
-                        @endif
+                        value="{{ old('nif') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('nif'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('nif') }}</small>
-                    @endif
+                    @error('nif')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Descripción</label>
-                    <textarea class="form-control" name="descripcion" cols="30" rows="5" placeholder="Una descripcion sobre la tarea...">@if (isset($request)){{ $request['descripcion'] }}@endif</textarea>
-                    @if (isset($gestor_err) && $gestor_err->hayError('descripcion'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('descripcion') }}</small>
-                    @endif
+                    <textarea class="form-control" name="descripcion" cols="30" rows="5" placeholder="Una descripcion sobre la tarea...">{{ old('descripcion') }}</textarea>
+                    @error('descripcion')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -82,35 +84,29 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Persona de contacto:</label>
                     <input type="text" name="contacto" class="form-control"
-                        @isset ($request)
-                            value="{{ $request['contacto'] }}"
-                        @endisset
+                       value="{{ old('contacto') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('contacto'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('contacto') }}</small>
-                    @endif
+                    @error('contacto')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Teléfono de contacto:</label>
                     <input type="text" name="telefono" class="form-control"
-                        @isset($request)
-                            value="{{ $request['telefono'] }}"
-                        @endisset
+                        value="{{ old('telefono') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('fecha_telefono'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('fecha_telefono') }}</small>
-                    @endif
+                    @error('telefono')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Correo de contacto:</label>
                     <input type="text" name="correo" class="form-control"
-                        @isset($request)
-                            value="{{ $request['correo'] }}"
-                        @endisset
+                        value="{{ old('correo') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('correo'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('correo') }}</small>
-                    @endif
+                    @error('correo')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -121,43 +117,40 @@
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Dirección:</label>
                     <input type="text" name="direccion" class="form-control" 
-                        @isset($request)
-                            value="{{ $request['direccion'] }}"
-                        @endisset
+                        value="{{ old('direccion') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('direccion'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('direccion') }}</small>
-                    @endif
+                    @error('direccion')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Provincia:</label>
                     <select name="id_provincia" class="form-select">
                         @foreach ($listaProvincias as $item)
-                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                            <option 
+                                @selected($item->id == old('id_provincia'))
+                                value="{{ $item->id }}">{{ $item->nombre }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Población:</label>
                     <input type="text" name="poblacion" id="poblacion" class="form-control"
-                        @isset($request)
-                            value="{{ $request['poblacion'] }}"
-                        @endisset
+                        value="{{ old('poblacion') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('poblacion'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('poblacion') }}</small>
-                    @endif
+                    @error('poblacion')
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Código postal:</label>
                     <input type="text" name="cod_postal" class="form-control"
-                        @isset($request)
-                            value="{{ $request['cod_postal'] }}"
-                        @endisset
+                        value="{{ old('cod_postal') }}"
                     >
-                    @if (isset($gestor_err) && $gestor_err->hayError('cod_postal'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('cod_postal') }}</small>
-                    @endif
+                    @error('cod_postal')
+                    <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                @enderror
                 </div>
             </div>
         </fieldset>

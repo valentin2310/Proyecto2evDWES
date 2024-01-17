@@ -38,8 +38,12 @@
                         <td>{{ $item->operario->nombre }}</td>
                         <td>{{ $item->descripcion }}</td>
                         <td>{{ $item->contacto }}</td>
-                        <td>{{ $item->fecha_creacion }}</td>
-                        <td>{{ $item->fecha_realizacion ?? 'Sin fecha' }}</td>
+                        <td>{{ $item->fecha_creacion->format('d/m/Y') }}</td>
+                        @if (isset($item->fecha_realizacion))
+                            <td>{{ $item->fecha_realizacion->format('d/m/Y')}}</td>
+                        @else
+                            <td>Sin fecha</td>
+                        @endif
                         <td class="text-center">
                             <button class="btn btn-dark" title="Ver toda la información de la tarea">
                                 <a href="{{ route('tareas.show', $item->id) }}" class="text-decoration-none text-primary">

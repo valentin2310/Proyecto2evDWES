@@ -7,34 +7,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Tarea extends Model
 {
     use HasFactory;
 
     protected $table = 'tareas';
+
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
-
-    protected $casts = [
-        'fecha_creacion' => 'datetime:d/m/Y',
-        'fecha_actualizacion' => 'datetime:d/m/Y',
-        'fecha_realizacion' => 'datetime:d/m/Y',
-    ];
-
-     // Lista con los estados que puede tener una tarea
+    // Lista con los estados que puede tener una tarea
     const OPTIONS_ESTADOS = [
         "P"=> "Pendiente",
         "R"=> "Realizada",
         "C"=> "Cancelada",
     ];
-
-    /**
-     * Prepare a date for array / JSON serialization.
-     */
-    protected function serializeDate(DateTimeInterface $date): string
+    
+    protected function contacto(): Attribute
     {
-        return $date->format('d/m/Y');
+        return Attribute::make(
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
+        );
     }
 
     public function operario(): BelongsTo
@@ -52,6 +47,10 @@ class Tarea extends Model
 
     public function getEstado()
     {
+        if (!array_key_exists($this->estado, self::OPTIONS_ESTADOS))
+        {
+            return 'Estado inválido';
+        }
         return self::OPTIONS_ESTADOS[$this->estado];
     }
 }

@@ -30,10 +30,14 @@
                 <p><span class="fw-bold">Descripción: </span>{{ $tarea->descripcion }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->fecha_creacion }}</p>
+                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->fecha_creacion->format('d/m/Y') }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion ?? 'Ninguna' }}</p>
+                @if (isset($tarea->fecha_realizacion))
+                    <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion->format('d/m/Y') }}</p>
+                @else
+                    <p><span class="fw-bold">Fecha realización: </span>Sin fecha</p>
+                @endif
             </div>
         </div>
     </section>
