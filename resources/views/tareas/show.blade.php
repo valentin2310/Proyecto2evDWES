@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-6">
                 @if (isset($tarea->fecha_realizacion))
-                    <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion->format('d/m/Y') }}</p>
+                    <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion }}</p>
                 @else
                     <p><span class="fw-bold">Fecha realización: </span>Sin fecha</p>
                 @endif
