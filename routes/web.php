@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\TareaController;
+use App\Mail\SendFactura;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +38,18 @@ Route::controller(TareaController::class)->group(function () {
 
     Route::get('tareas/{tarea}/edit', 'edit')->name('tareas.edit');
     Route::put('tareas/{tarea}', 'update')->name('tareas.update');
+    */
 
-    Route::get('tareas/{tarea}/delete', 'confirmacion')->name('tareas.confirmacion');
-    Route::get('tareas/{tarea}/resultado', 'delete')->name('tareas.delete'); */
+    Route::get('tareas/{tarea}/delete', 'delete')->name('tareas.delete');
+    Route::delete('tareas/{tarea}/resultado', 'destroy')->name('tareas.destroy');
 });
+
+Route::get('info/{title}:{body}', InfoController::class)->name('info');
+
+/* Route::get('factura', function(){
+
+    // Mailtrap.com
+    Mail::to('pepito@nosecaen.com')->send(new SendFactura);
+    return 'Mensaje enviado';
+
+})->name('mail.factura'); */

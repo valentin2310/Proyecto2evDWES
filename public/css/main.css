@@ -34,6 +34,9 @@ nav ul li a{
     color: #03A9F4;
     font-weight: bold;
 }
+nav ul li .active{
+    color: #0338b4;
+}
 .pagina{
     padding: 2em;
 }

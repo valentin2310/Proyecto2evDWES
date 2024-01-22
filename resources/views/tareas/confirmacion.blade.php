@@ -20,37 +20,42 @@
                 <p><span class="fw-bold">Id factura: </span>{{ $tarea->id }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Estado: </span>{{ $tarea->estado }}</p>
+                <p><span class="fw-bold">Estado: </span>{{ $tarea->getEstado() }}</p>
             </div>
             <div class="col-md-12">
                 <p><span class="fw-bold">NIF facturador: </span>{{ $tarea->nif }}</p>
             </div>
             <div class="col-md-12">
-                <p><span class="fw-bold">Operario: </span>{{ $tarea->operario ?? 'Ninguno' }}</p>
+                <p><span class="fw-bold">Operario: </span>{{ $tarea->operario->nombre ?? 'Ninguno' }}</p>
             </div>
             <div class="col-md-12">
                 <p><span class="fw-bold">Descripción: </span>{{ $tarea->descripcion }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->fecha_creacion }}</p>
+                <p><span class="fw-bold">Fecha creación: </span>{{ $tarea->fecha_creacion->format('d/m/Y') }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion }}</p>
+                <p><span class="fw-bold">Fecha realización: </span>{{ $tarea->fecha_realizacion ?? 'Sin fecha' }}</p>
             </div>
         </div>
     </section>
 
-    <button class="btn btn-danger fw-bold">
-        <a href="{{ route('tareas.delete', $tarea->id) }}" class="text-decoration-none text-white">
-            <i class="fa-solid fa-trash-can"></i>
-            Eliminar
-        </a>
-    </button>
-    <button class="btn btn-secondary fw-bold">
-        <a href="{{ route('home') }}" class="text-decoration-none text-white">
-            <i class="fa-solid fa-x"></i>
-            Cancelar
-        </a>
-    </button>
+    <div class="botones d-flex gap-1">
+        <form action="{{ route('tareas.destroy', $tarea->id) }}" method="POST">
+            @csrf
+            @method('delete')
+    
+            <button type="submit" class="btn btn-danger fw-bold text-white">
+                    <i class="fa-solid fa-trash-can"></i>
+                    Eliminar
+            </button>
+        </form>
+        <button class="btn btn-secondary fw-bold">
+            <a href="{{ route('home') }}" class="text-decoration-none text-white">
+                <i class="fa-solid fa-x"></i>
+                Cancelar
+            </a>
+        </button>
+    </div>
 
 @endsection

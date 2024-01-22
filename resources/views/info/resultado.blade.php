@@ -1,8 +1,8 @@
 <?php
 /**
- * Autor: Valentin Andrei Culea
- * Fecha: 07/12/2023
- * Versión 1
+ * @author: Valentin Andrei Culea
+ * @date: 08/01/2024
+ * @version 2
  */
 ?>
 @extends('layouts.plantilla')
@@ -11,13 +11,9 @@
 
 @section('contenido')
     
-<h1>Eliminar la Tarea {{ $id_tarea }}</h1>
+<h1>{{ $title }}</h1>
 
-    @if ($resultado)
-        <p>Se ha eliminado exitosamente la tarea!!</p>
-    @else
-        <p>Hubo un error en la eliminación de la tarea</p>
-    @endif
+    <p>{{ $body }}</p>
 
     <button class="btn btn-dark fw-bold">
         <a href="{{ route('home') }}" class="text-decoration-none text-white">

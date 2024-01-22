@@ -17,7 +17,10 @@
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/0a879c88fe.js" crossorigin="anonymous"></script>
     <!-- Mis estilos -->
+    <!-- Mis estilos -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tarea.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 </head>
 <body>
     <header>
@@ -42,16 +45,18 @@
     <main class="container">
         <nav>
             <ul>
-                <li><a href="/"># Inicio</a></li>
-                @if (isset($usuario) && $usuario->esAdmin())
+                <li><a href="/" class="{{ request()->routeIs('home') ? 'active' : '' }}"># Inicio</a></li>
+                <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Ver lista tareas</a></li>
+                <li><a href="{{route('tareas.create')}}" class="{{ request()->routeIs('tareas.create') ? 'active' : '' }}"># Añadir tarea</a></li>
+                {{-- @if (isset($usuario) && $usuario->esAdmin())
                     <li><a href="{{route('usuarios.show')}}"># Ver lista usuarios</a></li>
                     <li><a href="{{route('usuarios.create')}}"># Añadir usuario</a></li>
                 @endif
-                {{-- <li><a href="{{route('tareas.index')}}"># Ver lista tareas</a></li> --}}
+                <li><a href="{{route('tareas.index')}}"># Ver lista tareas</a></li>
                 @if (isset($usuario) && $usuario->esAdmin())
                     <li><a href="{{route('tareas.create')}}"># Añadir tarea</a></li>
                 @endif
-                {{-- <li><a href="{{route('tareas.search')}}"># Buscar o filtrar tareas</a></li> --}}
+                <li><a href="{{route('tareas.search')}}"># Buscar o filtrar tareas</a></li> --}}
             </ul>
         </nav>
 
@@ -65,7 +70,7 @@
         <div class="container">
             Creado por Valentin AC 
             <br>
-            &copy; - 2023
+            &copy; - 2024
         </div>
     </footer>
 </body>

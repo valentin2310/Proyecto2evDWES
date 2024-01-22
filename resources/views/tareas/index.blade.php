@@ -39,15 +39,16 @@
                         <td>{{ $item->descripcion }}</td>
                         <td>{{ $item->contacto }}</td>
                         <td>{{ $item->fecha_creacion->format('d/m/Y') }}</td>
-                        @if (isset($item->fecha_realizacion))
-                            <td>{{ $item->fecha_realizacion->format('d/m/Y')}}</td>
-                        @else
-                            <td>Sin fecha</td>
-                        @endif
-                        <td class="text-center">
+                        <td>{{ $item->fecha_realizacion ?? 'Sin fecha'}}</td>
+                        <td class="text-center d-flex gap-1">
                             <button class="btn btn-dark" title="Ver toda la información de la tarea">
                                 <a href="{{ route('tareas.show', $item->id) }}" class="text-decoration-none text-primary">
                                     <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </button>
+                            <button class="btn btn-dark" title="Eliminar la tarea">
+                                <a href="{{ route('tareas.delete', $item->id) }}" class="text-decoration-none text-danger">
+                                    <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </button>
                             @if (isset($usuario) && $usuario->esAdmin())
@@ -55,11 +56,6 @@
                                    {{--  <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
                                     </a> --}}
                                     <i class="fa-solid fa-pen"></i>
-                                </button>
-                                <button class="btn btn-dark" title="Eliminar la tarea">
-                                   {{--  <a href="{{ route('tareas.confirmacion', $item->id) }}" class="text-decoration-none text-danger">
-                                    </a> --}}
-                                    <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             @endif
                         </td>
