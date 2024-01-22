@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Tarea extends Model
 {
@@ -32,7 +33,6 @@ class Tarea extends Model
         'fecha_realizacion',
         'anotaciones_anteriores',
         'anotaciones_posteriores',
-        'fichero',
         'id_cliente'
     ];
 
@@ -106,5 +106,41 @@ class Tarea extends Model
             return 'Estado inválido';
         }
         return self::OPTIONS_ESTADOS[$this->estado];
+    }
+
+    public function guardarFichero($request)
+    {
+        if(!$request->hasFile('fichero')) return;
+
+        $fichero = $request->file('fichero');
+        $nombreFichero = $fichero->getClientOriginalName();
+        $fichero->storeAs("tareas/$this->id/ficheros_tarea", $nombreFichero, "public");
+
+        $this->fichero = "tareas/$this->id/ficheros_tarea/$nombreFichero";
+    }
+
+    public function guardarImagenes($request)
+    {
+        if(!$request->hasFile('fotos')) return;
+
+        foreach($request->file('fotos') as $foto){
+            $nombreFoto = $foto->getClientOriginalName();
+            $foto->storeAs("tareas/$this->id/fotos_tarea", $nombreFoto, "public");
+
+            $img = new Imagen();
+            $img->id_tarea = $this->id;
+            $img->path = "tareas/$this->id/fotos_tarea/$nombreFoto";
+
+            $img->save();
+        }
+    }
+
+    public function eliminarArchivos()
+    {
+        // Elimina la carpeta de la tarea en storage
+        $rutaDirectorio = "public/tareas/$this->id";
+        if(Storage::directoryExists($rutaDirectorio)){
+            Storage::deleteDirectory($rutaDirectorio);
+        }
     }
 }

@@ -55,6 +55,7 @@ class StoreTareaRequest extends FormRequest
     /**
      * Valida que el nif tenga el formato correcto y que sea válido.
      * @param string $string
+     * @return boolean
      */
     public function nifIsValid($string){
         // Tiene que tener un formato válido, formato español

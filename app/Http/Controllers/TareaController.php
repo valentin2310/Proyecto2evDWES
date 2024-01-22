@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompletarTareaRequest;
 use App\Http\Requests\StoreTareaRequest;
 use App\Models\Cliente;
 use App\Models\Empleado;
@@ -43,7 +44,8 @@ class TareaController extends Controller
 
     }
 
-    public function edit(Tarea $tarea){
+    public function edit(Tarea $tarea)
+    {
         return view('tareas/edit', [
             'tarea' => $tarea,
             'optionsEstado' => Tarea::OPTIONS_ESTADOS,
@@ -53,10 +55,31 @@ class TareaController extends Controller
         ]);
     }
 
-    public function update(StoreTareaRequest $request, Tarea $tarea){
+    public function update(StoreTareaRequest $request, Tarea $tarea): RedirectResponse
+    {
         $request->validated();
         $tarea->update($request->all());
 
+        return redirect()->route('tareas.show', $tarea);
+    }
+
+    public function completar(Tarea $tarea)
+    {
+        return view('tareas/completar', [
+            'tarea' => $tarea,
+            'optionsEstado' => Tarea::OPTIONS_ESTADOS
+        ]);
+    }
+
+    public function completarUpdate(CompletarTareaRequest $request, Tarea $tarea): RedirectResponse
+    {
+        $request->validated();
+
+        $tarea->guardarFichero($request);
+        $tarea->guardarImagenes($request);
+
+        $tarea->update($request->all());
+        
         return redirect()->route('tareas.show', $tarea);
     }
 
@@ -67,6 +90,7 @@ class TareaController extends Controller
 
     public function destroy(Tarea $tarea)
     {
+        $tarea->eliminarArchivos();
         $resultado = $tarea->delete();
 
         return redirect()->route('info', [

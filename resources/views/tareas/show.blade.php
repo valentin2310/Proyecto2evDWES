@@ -45,27 +45,12 @@
     <section>
         <h1 class="text-azul"><i class="fa-solid fa-gear me-3"></i>Acciones</h1>
         <div class="px-4 py-2">
-            {{-- @if ($usuario->esAdmin())    
-                <button class="btn btn-dark fw-bold">
-                    <a href="{{ route('tareas.edit', $tarea->id) }}" class="text-decoration-none text-warning">
-                        <i class="fa-solid fa-pen me-2"></i>
-                        Modificar
-                    </a>
-                </button>
-                <button class="btn btn-danger fw-bold">
-                    <a href="{{ route('tareas.confirmacion', $tarea->id) }}" class="text-decoration-none text-white">
-                        <i class="fa-solid fa-trash-can me-2"></i>
-                        Eliminar
-                    </a>
-                </button>
-            @else
-                <button class="btn btn-dark fw-bold" @disabled($tarea->operario != $usuario->id) >
-                    <a href="{{ route('tareas.completar', $tarea->id) }}" class="text-decoration-none text-success">
-                        <i class="fa-solid fa-circle-check me-2"></i>
-                        Completar tarea
-                    </a>
-                </button>
-            @endif --}}
+            <button class="btn btn-dark fw-bold">
+                <a href="{{ route('tareas.completar', $tarea->id) }}" class="text-decoration-none text-success">
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                    Completar tarea
+                </a>
+            </button>
             <button class="btn btn-dark fw-bold">
                 <a href="{{ route('tareas.edit', $tarea->id) }}" class="text-decoration-none text-warning">
                     <i class="fa-solid fa-pen me-2"></i>
@@ -137,13 +122,13 @@
         </div>
     </section>
 
-    {{-- <section>
+    <section>
         <h1 class="text-azul"><i class="fa-solid fa-image me-3"></i>Fotos del trabajo realizado</h1>
         <div class="px-4 py-2">
-            @if (count($tarea->getImagenes()) > 0)
-                <p>Hay {{ count($tarea->getImagenes()) }} fotos: </p>
+            @if ($tarea->imagenes->count() > 0)
+                <p>Hay {{ $tarea->imagenes->count() }} fotos: </p>
                 <div class="fotos my-3 d-flex flex-wrap justify-content-center align-items-center gap-1">
-                    @foreach ($tarea->getImagenes() as $img)
+                    @foreach ($tarea->imagenes as $img)
                         <div class="foto-card">
                             <img src="{{ asset('storage/' . $img['path']) }}" width="200" alt="Imagen de la tarea">
                         </div>
@@ -153,6 +138,6 @@
                 <p>No hay ninguna foto</p>
             @endif
         </div>
-    </section> --}}
+    </section>
     
 @endsection

@@ -32,10 +32,8 @@ Route::controller(TareaController::class)->group(function () {
 
     Route::get('tareas/{tarea}', 'show')->name('tareas.show');
     
-    /*
     Route::get('tareas/{tarea}/completar', 'completar')->name('tareas.completar');
     Route::put('tareas/{tarea}/completar', 'completarUpdate')->name('tareas.completarUpdate');
-    */
     
     Route::get('tareas/{tarea}/edit', 'edit')->name('tareas.edit');
     Route::put('tareas/{tarea}', 'update')->name('tareas.update');
