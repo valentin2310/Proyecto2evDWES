@@ -43,6 +43,23 @@ class TareaController extends Controller
 
     }
 
+    public function edit(Tarea $tarea){
+        return view('tareas/edit', [
+            'tarea' => $tarea,
+            'optionsEstado' => Tarea::OPTIONS_ESTADOS,
+            'listaProvincias' => Provincia::all(),
+            'listaOperarios' => Empleado::getOperarios(),
+            'listaClientes' => Cliente::all()
+        ]);
+    }
+
+    public function update(StoreTareaRequest $request, Tarea $tarea){
+        $request->validated();
+        $tarea->update($request->all());
+
+        return redirect()->route('tareas.show', $tarea);
+    }
+
     public function delete(Tarea $tarea)
     {
         return view('tareas/confirmacion', compact('tarea'));

@@ -35,10 +35,10 @@ Route::controller(TareaController::class)->group(function () {
     /*
     Route::get('tareas/{tarea}/completar', 'completar')->name('tareas.completar');
     Route::put('tareas/{tarea}/completar', 'completarUpdate')->name('tareas.completarUpdate');
-
+    */
+    
     Route::get('tareas/{tarea}/edit', 'edit')->name('tareas.edit');
     Route::put('tareas/{tarea}', 'update')->name('tareas.update');
-    */
 
     Route::get('tareas/{tarea}/delete', 'delete')->name('tareas.delete');
     Route::delete('tareas/{tarea}/resultado', 'destroy')->name('tareas.destroy');

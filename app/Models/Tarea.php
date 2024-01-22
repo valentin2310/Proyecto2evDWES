@@ -16,7 +16,25 @@ class Tarea extends Model
     use HasFactory;
 
     protected $table = 'tareas';
-    protected $guarded = [];
+    protected $fillable = [
+        'nif',
+        'contacto',
+        'contacto',
+        'telefono',
+        'descripcion',
+        'correo',
+        'direccion',
+        'poblacion',
+        'id_provincia',
+        'cod_postal',
+        'estado',
+        'id_operario',
+        'fecha_realizacion',
+        'anotaciones_anteriores',
+        'anotaciones_posteriores',
+        'fichero',
+        'id_cliente'
+    ];
 
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';

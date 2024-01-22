@@ -66,6 +66,18 @@
                     </a>
                 </button>
             @endif --}}
+            <button class="btn btn-dark fw-bold">
+                <a href="{{ route('tareas.edit', $tarea->id) }}" class="text-decoration-none text-warning">
+                    <i class="fa-solid fa-pen me-2"></i>
+                    Modificar
+                </a>
+            </button>
+            <button class="btn btn-danger fw-bold">
+                <a href="{{ route('tareas.delete', $tarea->id) }}" class="text-decoration-none text-white">
+                    <i class="fa-solid fa-trash-can me-2"></i>
+                    Eliminar
+                </a>
+            </button>
         </div>
     </section>
 

@@ -22,8 +22,6 @@
         <fieldset>
             <legend class="text-azul">Datos de la tarea</legend>
             <div class="row m-0 p-2">
-                <!-- Campo oculto con el valor del estado -->
-                <input type="hidden" name="estado" value="P">
                 <div class="col-md-5 mb-3">
                     <label class="form-label">Cliente:</label>
                     <select class="form-select" name="id_cliente">
@@ -149,8 +147,8 @@
                         value="{{ old('cod_postal') }}"
                     >
                     @error('cod_postal')
-                    <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
-                @enderror
+                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
