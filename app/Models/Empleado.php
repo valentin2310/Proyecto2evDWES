@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class Empleado extends Model
 {
@@ -29,5 +30,10 @@ class Empleado extends Model
     public static function getOperarios()
     {
         return self::where('tipo', Empleado::TIPOS_USUARIOS["OPERARIO"])->get();
+    }
+
+    public function esAdmin(): Bool
+    {
+        return $this->tipo == self::TIPOS_USUARIOS['ADMIN'];
     }
 }

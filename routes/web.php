@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\TareaController;
@@ -40,6 +42,27 @@ Route::controller(TareaController::class)->group(function () {
 
     Route::get('tareas/{tarea}/delete', 'delete')->name('tareas.delete');
     Route::delete('tareas/{tarea}/resultado', 'destroy')->name('tareas.destroy');
+});
+
+Route::controller(EmpleadoController::class)->group(function(){
+    /* Route::get('login', 'index')->name('login.index');
+    Route::post('login', 'login')->name('login.login');
+    Route::post('logout', 'logout')->name('login.logout'); */
+
+    Route::get('empleados', 'show')->name('empleados.show');
+
+    /* Route::get('usuarios/create', 'create')->name('usuarios.create');
+    Route::post('usuarios/create', 'store')->name('usuarios.store');
+
+    Route::get('usuarios/{usuario}/edit', 'edit')->name('usuarios.edit');
+    Route::put('usuarios/{usuario}/edit', 'update')->name('usuarios.update');
+
+    Route::get('usuarios/{usuario}/delete', 'confirmacion')->name('usuarios.confirmacion');
+    Route::get('usuarios/{usuario}/resultado', 'delete')->name('usuarios.delete'); */
+});
+
+Route::controller(ClienteController::class)->group(function(){
+    Route::get('clientes', 'show')->name('clientes.show');
 });
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');
