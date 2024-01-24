@@ -51,7 +51,8 @@ class Empleado extends Model
      * @param string $string
      * @return boolean
      */
-    public static function nifIsValid($string){
+    public static function nifIsValid($string)
+    {
         // Tiene que tener un formato válido, formato español
         $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         $letrasNIE = "XYZ";

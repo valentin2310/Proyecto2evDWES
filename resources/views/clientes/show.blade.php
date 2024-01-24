@@ -34,8 +34,8 @@
                         <td>{{ $item->cif }}</td>
                         <td>{{ $item->nombre }}</td>
                         <td>{{ $item->correo }}</td>
-                        <td>{{ $item->pais }}</td>
-                        <td>{{ $item->cuota_mensual }}€</td>
+                        <td>{{ $item->pais->name }}</td>
+                        <td>{{ $item->cuota_mensual }} {{ $item->moneda->symbol }}</td>
                         <td class="text-center">
                             {{-- <button class="btn btn-dark" title="Ver tareas asignadas del operario">
                                 <a href="{{ route('tareas.search', [

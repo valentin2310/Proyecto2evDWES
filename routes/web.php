@@ -59,6 +59,9 @@ Route::controller(EmpleadoController::class)->group(function(){
 
 Route::controller(ClienteController::class)->group(function(){
     Route::get('clientes', 'show')->name('clientes.show');
+
+    Route::get('clientes/create', 'create')->name('clientes.create');
+    Route::post('clientes/create', 'store')->name('clientes.store');
 });
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');
