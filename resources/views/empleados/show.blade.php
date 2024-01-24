@@ -40,6 +40,11 @@
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                             </button>
+                            <button class="btn btn-dark" title="Eliminar el usuario">
+                                <a href="{{ route('empleados.delete', $item->id) }}" class="text-decoration-none text-danger">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </button>
                             {{-- <button class="btn btn-dark" title="Ver tareas asignadas del operario">
                                 <a href="{{ route('tareas.search', [
                                         'page'=>1,
@@ -51,16 +56,7 @@
                                     <i class="fa-solid fa-list-check"></i>
                                 </a>
                             </button>
-                            <button class="btn btn-dark" title="Modificar el usuario">
-                                <a href="{{ route('usuarios.edit', $item->id) }}" class="text-decoration-none text-warning">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                            </button>
-                            <button class="btn btn-dark" title="Eliminar el usuario">
-                                <a href="{{ route('usuarios.confirmacion', $item->id) }}" class="text-decoration-none text-danger">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                            </button> --}}
+                             --}}
                         </td>
                     </tr>
                 @endforeach

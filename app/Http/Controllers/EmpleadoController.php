@@ -41,4 +41,19 @@ class EmpleadoController extends Controller
 
         return redirect()->route('empleados.show');
     }
+
+    public function delete(Empleado $empleado)
+    {
+        return view('empleados/confirmacion', compact('empleado'));
+    }
+
+    public function destroy(Empleado $empleado)
+    {
+        $resultado = $empleado->delete();
+
+        return redirect()->route('info', [
+            'title' => 'Eliminar el empleado '.$empleado->nombre,
+            'body' => $resultado ? 'El empleado se ha eliminado exitosamente.' : 'Hubo un error al eliminar el empleado'
+        ]);
+    }
 }

@@ -52,10 +52,9 @@ Route::controller(EmpleadoController::class)->group(function(){
     
     Route::get('empleados/{empleado}/edit', 'edit')->name('empleados.edit');
     Route::put('empleados/{empleado}/edit', 'update')->name('empleados.update');
-    /* 
-
-    Route::get('usuarios/{usuario}/delete', 'confirmacion')->name('usuarios.confirmacion');
-    Route::get('usuarios/{usuario}/resultado', 'delete')->name('usuarios.delete'); */
+    
+    Route::get('empleados/{empleado}/delete', 'delete')->name('empleados.delete');
+    Route::delete('empleados/{empleado}/resultado', 'destroy')->name('empleados.destroy');
 });
 
 Route::controller(ClienteController::class)->group(function(){
