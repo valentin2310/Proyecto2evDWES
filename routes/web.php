@@ -45,15 +45,12 @@ Route::controller(TareaController::class)->group(function () {
 });
 
 Route::controller(EmpleadoController::class)->group(function(){
-    /* Route::get('login', 'index')->name('login.index');
-    Route::post('login', 'login')->name('login.login');
-    Route::post('logout', 'logout')->name('login.logout'); */
-
     Route::get('empleados', 'show')->name('empleados.show');
 
-    /* Route::get('usuarios/create', 'create')->name('usuarios.create');
-    Route::post('usuarios/create', 'store')->name('usuarios.store');
-
+    Route::get('empleados/create', 'create')->name('empleados.create');
+    Route::post('empleados/create', 'store')->name('empleados.store');
+    
+    /* 
     Route::get('usuarios/{usuario}/edit', 'edit')->name('usuarios.edit');
     Route::put('usuarios/{usuario}/edit', 'update')->name('usuarios.update');
 

@@ -12,6 +12,15 @@ class Empleado extends Model
     use HasFactory;
 
     protected $table = 'empleados';
+    protected $fillable = [
+        'nif',
+        'nombre',
+        'correo',
+        'telefono',
+        'direccion',
+        'tipo',
+        'passwd'
+    ];
 
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
