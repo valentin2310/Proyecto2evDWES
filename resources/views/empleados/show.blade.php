@@ -12,7 +12,13 @@
 @section('contenido')
     <h1>Aquí se muestran todos los empleados</h1>
 
-    <div class="info-busqueda pt-3">
+    <button class="btn btn-dark my-3">
+        <a href="{{ route('empleados.create') }}" class="text-decoration-none text-white">
+            <i class="fa-solid fa-user-plus text-info me-2"></i>Añadir empleado
+        </a>
+    </button>
+
+    <div class="info-busqueda">
         <p class="fw-bold">Hay {{ $empleados->count() }} resultados:</p>
     </div>
 

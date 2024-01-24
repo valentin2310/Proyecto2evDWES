@@ -31,6 +31,7 @@
             <li class="bg-dark"><a href="{{route('tareas.create')}}"><i class="fa-solid fa-square-plus text-white p-2"></i><br>Añadir tarea</a></li>
             <li class="bg-dark"><a href="{{route('tareas.index')}}"><i class="fa-solid fa-magnifying-glass text-white p-2"></i><br>Buscar o filtrar tareas</a></li>
             <li class="bg-dark"><a href="{{route('empleados.show')}}"><i class="fa-solid fa-list-ul text-danger p-2"></i><br>Ver lista empleados</a></li>
+            <li class="bg-dark"><a href="{{route('empleados.create')}}"><i class="fa-solid fa-user-plus text-danger p-2"></i><br>Añadir empleado</a></li>
             <li class="bg-dark"><a href="{{route('clientes.show')}}"><i class="fa-solid fa-list text-info p-2"></i><br>Ver lista clientes</a></li>
         </ul>
     </div>

@@ -49,6 +49,7 @@
                 <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Ver lista tareas</a></li>
                 <li><a href="{{route('tareas.create')}}" class="{{ request()->routeIs('tareas.create') ? 'active' : '' }}"># Añadir tarea</a></li>
                 <li><a href="{{route('empleados.show')}}" class="{{ request()->routeIs('empleados.show') ? 'active' : '' }}"># Ver lista empleados</a></li>
+                <li><a href="{{route('empleados.create')}}" class="{{ request()->routeIs('empleados.create') ? 'active' : '' }}"># Añadir empleado</a></li>
                 <li><a href="{{route('clientes.show')}}" class="{{ request()->routeIs('clientes.show') ? 'active' : '' }}"># Ver lista clientes</a></li>
                 {{-- @if (isset($usuario) && $usuario->esAdmin())
                     <li><a href="{{route('usuarios.show')}}"># Ver lista usuarios</a></li>
