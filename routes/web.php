@@ -50,9 +50,9 @@ Route::controller(EmpleadoController::class)->group(function(){
     Route::get('empleados/create', 'create')->name('empleados.create');
     Route::post('empleados/create', 'store')->name('empleados.store');
     
+    Route::get('empleados/{empleado}/edit', 'edit')->name('empleados.edit');
+    Route::put('empleados/{empleado}/edit', 'update')->name('empleados.update');
     /* 
-    Route::get('usuarios/{usuario}/edit', 'edit')->name('usuarios.edit');
-    Route::put('usuarios/{usuario}/edit', 'update')->name('usuarios.update');
 
     Route::get('usuarios/{usuario}/delete', 'confirmacion')->name('usuarios.confirmacion');
     Route::get('usuarios/{usuario}/resultado', 'delete')->name('usuarios.delete'); */

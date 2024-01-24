@@ -35,6 +35,11 @@
                         <td>{{ $item->correo }}</td>
                         <td>{{ $item->esAdmin() ? 'Admin' : 'Operario' }}</td>
                         <td class="text-center">
+                            <button class="btn btn-dark" title="Modificar el usuario">
+                                <a href="{{ route('empleados.edit', $item->id) }}" class="text-decoration-none text-warning">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </button>
                             {{-- <button class="btn btn-dark" title="Ver tareas asignadas del operario">
                                 <a href="{{ route('tareas.search', [
                                         'page'=>1,

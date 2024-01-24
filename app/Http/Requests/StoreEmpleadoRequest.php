@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Empleado;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 class StoreEmpleadoRequest extends FormRequest
@@ -26,7 +27,11 @@ class StoreEmpleadoRequest extends FormRequest
         return [
             'nif' => 'required',
             'nombre' => 'required|min:3',
-            'correo' => 'required|email:rfc,filter|unique:empleados,correo', 
+            'correo' => [
+                'required',
+                'email:rfc,filter',
+                Rule::unique('empleados')->ignore($this->input('id'))
+            ], 
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9', 
             'tipo' => 'required|regex:/^[01]{1}$/',
             'passwd' => 'required|min:3|same:passwd_2',
