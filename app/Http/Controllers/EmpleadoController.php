@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmpleadoRequest;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 
@@ -19,20 +20,11 @@ class EmpleadoController extends Controller
         return view('empleados/create');
     }
 
-    public function store(Request $request)
+    public function store(StoreEmpleadoRequest $request)
     {
-        $request->validate([
-            'nif' => 'required',
-            'nombre' => 'required|min:3',
-            'correo' => 'required|email:rfc,filter', // debe tener un formato correcto
-            'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9', // sólo números, y caracteres de separación (espacio, guión, y otros que estiméis oportuno).
-            'tipo' => 'required|regex:/^[01]{1}$/',
-            'passwd' => 'required|min:3|same:passwd_2',
-            'passwd_2' => 'required|min:3'
-        ]);
+        $request->validated();
+        Empleado::create($request->all());
 
-        $empleado = Empleado::create($request->all());
-
-        return $empleado;
+        return redirect()->route('empleados.show');
     }
 }

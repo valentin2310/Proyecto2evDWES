@@ -45,4 +45,48 @@ class Empleado extends Model
     {
         return $this->tipo == self::TIPOS_USUARIOS['ADMIN'];
     }
+
+    /**
+     * Valida que el nif tenga el formato correcto y que sea válido.
+     * @param string $string
+     * @return boolean
+     */
+    public static function nifIsValid($string){
+        // Tiene que tener un formato válido, formato español
+        $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        $letrasNIE = "XYZ";
+        // El patrong que tiene que tener el nif
+        $patron = "/^([XYZ]|[0-9]){1}[0-9]{7}[A-Z]{1}$/";
+
+        // Convierte el nif a mayúsculas
+        $nif = strtoupper($string);
+
+        // Comprueba que tenga el formato correcto
+        if(preg_match($patron, $nif)){
+            $nifSinLetra = substr($nif, 0, strlen($nif)-1);
+
+            // Si el nif tiene xyz al inicio sustituirlo por su correspondiente valor numérico
+            if(preg_match("/[XYZ]+/", $nifSinLetra)){
+                for($i = 0; $i < strlen($letrasNIE); $i++){
+                    if($nifSinLetra[0] == $letrasNIE[$i]){
+                        $nifSinLetra = $i . substr($nifSinLetra, 1);
+                    }
+                }
+            }
+
+            // Obtiene la letra del nif
+            $resto = intval($nifSinLetra)%23;
+            $letra = $letras[$resto];
+
+            // Comprueba si la letra del nif es válida
+            if($nif[8] != $letra){
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+        return true;
+    }
 }
