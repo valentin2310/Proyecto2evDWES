@@ -41,7 +41,7 @@ Route::controller(TareaController::class)->group(function () {
     Route::put('tareas/{tarea}', 'update')->name('tareas.update');
 
     Route::get('tareas/{tarea}/delete', 'delete')->name('tareas.delete');
-    Route::delete('tareas/{tarea}/resultado', 'destroy')->name('tareas.destroy');
+    Route::delete('tareas/{tarea}/delete', 'destroy')->name('tareas.destroy');
 });
 
 Route::controller(EmpleadoController::class)->group(function(){
@@ -54,7 +54,7 @@ Route::controller(EmpleadoController::class)->group(function(){
     Route::put('empleados/{empleado}/edit', 'update')->name('empleados.update');
     
     Route::get('empleados/{empleado}/delete', 'delete')->name('empleados.delete');
-    Route::delete('empleados/{empleado}/resultado', 'destroy')->name('empleados.destroy');
+    Route::delete('empleados/{empleado}/delete', 'destroy')->name('empleados.destroy');
 });
 
 Route::controller(ClienteController::class)->group(function(){
@@ -62,6 +62,12 @@ Route::controller(ClienteController::class)->group(function(){
 
     Route::get('clientes/create', 'create')->name('clientes.create');
     Route::post('clientes/create', 'store')->name('clientes.store');
+
+    Route::get('clientes/{cliente}/edit', 'edit')->name('clientes.edit');
+    Route::put('clientes/{cliente}/edit', 'update')->name('clientes.update');
+
+    Route::get('clientes/{cliente}/delete', 'delete')->name('clientes.delete');
+    Route::delete('clientes/{cliente}/delete', 'destroy')->name('clientes.destroy');
 });
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');

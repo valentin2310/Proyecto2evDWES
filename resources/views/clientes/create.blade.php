@@ -70,7 +70,7 @@
                     name="id_moneda" label="Moneda"
                     :list="$monedas" value="11"
                     icon="fa-solid fa-coins" col="4"
-                    show2="symbol"
+                    show2="code" show3="symbol"
                 >
                 </x-form_select>
                 <x-form_control 

@@ -43,6 +43,16 @@
                         <td>{{ $item->pais->name }}</td>
                         <td>{{ $item->cuota_mensual }} {{ $item->moneda->symbol }}</td>
                         <td class="text-center">
+                            <a href="{{ route('clientes.edit', $item->id) }}" class="text-decoration-none text-warning">
+                                <button class="btn btn-dark text-warning" title="Modificar el cliente">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </a>
+                            <a href="{{ route('clientes.delete', $item->id) }}" class="text-decoration-none text-danger">
+                                <button class="btn btn-dark text-danger" title="Eliminar el cliente">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </a>
                             {{-- <button class="btn btn-dark" title="Ver tareas asignadas del operario">
                                 <a href="{{ route('tareas.search', [
                                         'page'=>1,

@@ -6,7 +6,8 @@
     'icon', 
     'col' => '12',
     'show' => 'name',
-    'show2'
+    'show2',
+    'show3',
 ])
 
 <div class="col-md-{{ $col }} mb-3">
@@ -17,6 +18,9 @@
                 {{ $item->{$show} }}
                 @isset($show2)
                      ({{ $item->{$show2} }})
+                @endisset
+                @isset($show3)
+                     ({{ $item->{$show3} }})
                 @endisset
             </option>
         @endforeach
