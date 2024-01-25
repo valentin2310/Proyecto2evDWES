@@ -22,108 +22,62 @@
         <fieldset>
             <legend class="text-azul">Datos del cliente</legend>
             <div class="row m-0 p-4">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-address-card me-2"></i>CIF:</label>
-                    <input type="text" name="cif" class="form-control"
-                        value="{{ old('cif') }}"
-                    >
-                    @error('cif')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-user-tag me-2"></i>Nombre:</label>
-                    <input type="text" name="nombre" class="form-control"
-                        value="{{ old('nombre') }}"
-                    >
-                    @error('nombre')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-phone me-2"></i>Teléfono:</label>
-                    <input type="text" name="telefono" class="form-control"
-                        value="{{ old('telefono') }}"
-                    >
-                    @error('telefono')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-12 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-envelope me-2"></i>Correo:</label>
-                    <input type="text" name="correo" class="form-control"
-                        value="{{ old('correo') }}"
-                    >
-                    @error('correo')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-key me-2"></i>Contraseña:</label>
-                    <input type="password" name="passwd" class="form-control"
-                       value="{{ old('passwd') }}"
-                    >
-                    @error('passwd')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-key me-2"></i>Repite la contraseña:</label>
-                    <input type="password" name="passwd_2" class="form-control"
-                       value="{{ old('passwd_2') }}"
-                    >
-                    @error('passwd_2')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
+                <x-form_control 
+                    name="cif" label="CIF"
+                    icon="fa-solid fa-address-card" col="6"
+                    placeholder="Ej: Q3032789D.."
+                />
+                <x-form_control 
+                    name="nombre" label="Nombre" 
+                    icon="fa-solid fa-user-tag" col="6"
+                    placeholder="Ej: Juanito Flores SL.."
+                />
+                <x-form_control 
+                    name="telefono" label="Teléfono" 
+                    icon="fa-solid fa-phone" col="6"
+                    placeholder="Ej: 921843765"
+                />
+                <x-form_control 
+                    name="correo" label="Correo" 
+                    icon="fa-solid fa-envelope" col="12"
+                    placeholder="Ej: example@example.com"
+                />
+                <x-form_control 
+                    name="passwd" label="Contraseña" 
+                    icon="fa-solid fa-key" col="6" type="password"
+                />
+                <x-form_control 
+                    name="passwd_2" label="Repite la contraseña" 
+                    icon="fa-solid fa-key" col="6" type="password"
+                />
             </div>
 
             <legend class="text-azul">Datos de facturación</legend>
             <div class="row m-0 p-4">
-                <div class="col-md-12 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-credit-card me-2"></i>Cuenta corriente:</label>
-                    <input type="text" name="cuenta_corriente" class="form-control"
-                        value="{{ old('cuenta_corriente') }}"
-                    >
-                    @error('cuenta_corriente')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-globe me-2"></i>País:</label>
-                    <select name="id_pais" class="form-select">
-                        @foreach ($paises as $item)
-                            <option value="{{ $item->id }}" @selected($item->id == old('id_pais'))>
-                                {{ $item->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('id_pais')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-coins me-2"></i>Moneda:</label>
-                    <select name="id_moneda" class="form-select">
-                        @foreach ($monedas as $item)
-                            <option value="{{ $item->id }}" @selected($item->id == old('id_moneda'))>
-                                {{ $item->name }}({{ $item->symbol }})
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('id_moneda')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label"><i class="fa-solid fa-sack-dollar me-2"></i>Cuota mensual:</label>
-                    <input type="number" step="0.001" name="cuota_mensual" class="form-control"
-                        value="{{ old('cuota_mensual', 0) }}"
-                    >
-                    @error('cuota_mensual')
-                        <x-msg_error :message="$message" />
-                    @enderror
-                </div>
+                <x-form_control 
+                    name="cuenta_corriente" label="Cuenta corriente" 
+                    icon="fa-solid fa-credit-card" col="12"
+                    placeholder="Ej: ES72 2080 8373 7774 9277 0286"
+                />
+                <x-form_select 
+                    name="id_pais" label="País"
+                    :list="$paises" value="724"
+                    icon="fa-solid fa-globe" col="4"
+                    show2="iso"
+                >
+                </x-form_select>
+                <x-form_select 
+                    name="id_moneda" label="Moneda"
+                    :list="$monedas" value="11"
+                    icon="fa-solid fa-coins" col="4"
+                    show2="symbol"
+                >
+                </x-form_select>
+                <x-form_control 
+                    name="cuota_mensual" label="Cuota mensual"
+                    icon="fa-solid fa-sack-dollar" col="4" 
+                    type="number" step="0.001" value="0"
+                />
             </div>
         </fieldset>
         <div class="text-center">
@@ -134,14 +88,3 @@
 </div>
 
 @endsection
-{{-- 
-<div class="col-md-6 mb-3">
-    <label class="form-label"><i class="fa-solid fa-user-tie me-2"></i>Tipo de empleado:</label>
-    <select name="tipo" class="form-select">
-        <option value="1" @selected(old('tipo') == '1')>Operario</option>
-        <option value="0" @selected(old('tipo') == '0')>Administrador</option>
-    </select>
-    @error('tipo')
-        <x-msg_error :message="$message" />
-    @enderror
-</div> --}}

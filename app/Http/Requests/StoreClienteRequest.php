@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Cliente;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreClienteRequest extends FormRequest
 {
@@ -26,12 +27,17 @@ class StoreClienteRequest extends FormRequest
         return [
             'cif' => 'required',
             'nombre' => 'required|min:3',
-            'correo' => 'email:rfc,filter',
+            'correo' => [
+                'required',
+                'email:rfc,filter',
+                Rule::unique('clientes')->ignore($this->input('id')),
+                Rule::unique('empleados')
+            ], 
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
             'passwd' => 'required|min:3|same:passwd_2',
             'passwd_2' => 'required|min:3',
             'cuenta_corriente' => 'required',
-            'cuota_mensual' => 'nullable|numeric'
+            'cuota_mensual' => 'nullable|numeric|gte:0'
         ];
     }
 

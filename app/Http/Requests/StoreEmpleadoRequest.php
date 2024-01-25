@@ -30,7 +30,8 @@ class StoreEmpleadoRequest extends FormRequest
             'correo' => [
                 'required',
                 'email:rfc,filter',
-                Rule::unique('empleados')->ignore($this->input('id'))
+                Rule::unique('empleados')->ignore($this->input('id')),
+                Rule::unique('clientes')
             ], 
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9', 
             'tipo' => 'required|regex:/^[01]{1}$/',
