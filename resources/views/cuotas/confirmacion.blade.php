@@ -1,7 +1,7 @@
 <?php
 /**
  * @author: Valentin Andrei Culea
- * @date: 25/01/2024
+ * @date: 30/01/2024
  * @version 2
  */
 ?>
@@ -11,12 +11,12 @@
 
 @section('contenido')
     
-    <h1>¿Estás seguro que quieres eliminar el empleado/a '{{ $empleado->nombre }}'?</h1>
+    <h1>¿Estás seguro que quieres eliminar la cuota {{ $cuota->id }}: '{{ $cuota->concepto }}'?</h1>
 
-    <p>Se eliminará el empleado permanentemente, no habrá forma de recuperarlo más tarde.</p>
+    <p>Se eliminará la cuota permanentemente, no habrá forma de recuperarla más tarde.</p>
 
     <div class="botones d-flex gap-1">
-        <form action="{{ route('empleados.destroy', $empleado->id) }}" method="POST">
+        <form action="{{ route('cuotas.destroy', $cuota->id) }}" method="POST">
             @csrf
             @method('delete')
 

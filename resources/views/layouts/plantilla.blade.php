@@ -17,7 +17,6 @@
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/0a879c88fe.js" crossorigin="anonymous"></script>
     <!-- Mis estilos -->
-    <!-- Mis estilos -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tarea.css') }}">
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
@@ -51,6 +50,9 @@
                 <li><a href="{{route('empleados.show')}}" class="{{ request()->routeIs('empleados.show') ? 'active' : '' }}"># Ver lista empleados</a></li>
                 <li><a href="{{route('empleados.create')}}" class="{{ request()->routeIs('empleados.create') ? 'active' : '' }}"># Añadir empleado</a></li>
                 <li><a href="{{route('clientes.show')}}" class="{{ request()->routeIs('clientes.show') ? 'active' : '' }}"># Ver lista clientes</a></li>
+                <li><a href="{{route('clientes.create')}}" class="{{ request()->routeIs('clientes.create') ? 'active' : '' }}"># Añadir cliente</a></li>
+                <li><a href="{{route('cuotas.show')}}" class="{{ request()->routeIs('cuotas.show') ? 'active' : '' }}"># Ver lista cuotas</a></li>
+                <li><a href="{{route('cuotas.create')}}" class="{{ request()->routeIs('cuotas.create') ? 'active' : '' }}"># Añadir cuota</a></li>
                 {{-- @if (isset($usuario) && $usuario->esAdmin())
                     <li><a href="{{route('usuarios.show')}}"># Ver lista usuarios</a></li>
                     <li><a href="{{route('usuarios.create')}}"># Añadir usuario</a></li>

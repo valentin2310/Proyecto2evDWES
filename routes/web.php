@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CuotaController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoController;
@@ -68,6 +69,19 @@ Route::controller(ClienteController::class)->group(function(){
 
     Route::get('clientes/{cliente}/delete', 'delete')->name('clientes.delete');
     Route::delete('clientes/{cliente}/delete', 'destroy')->name('clientes.destroy');
+});
+
+Route::controller(CuotaController::class)->group(function(){
+    Route::get('cuotas', 'show')->name('cuotas.show');
+
+    Route::get('cuotas/create', 'create')->name('cuotas.create');
+    Route::post('cuotas/create', 'store')->name('cuotas.store');
+
+    Route::get('cuotas/{cuota}/edit', 'edit')->name('cuotas.edit');
+    Route::put('cuotas/{cuota}/edit', 'update')->name('cuotas.update');
+
+    Route::get('cuotas/{cuota}/delete', 'delete')->name('cuotas.delete');
+    Route::delete('cuotas/{cuota}/delete', 'destroy')->name('cuotas.destroy');
 });
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');

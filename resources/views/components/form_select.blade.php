@@ -14,7 +14,13 @@
     <label class="form-label"><i class="{{ $icon }} me-2"></i>{{ $label }}:</label>
     <select name="{{ $name }}" class="form-select">
         @foreach ($list as $item)
-            <option value="{{ $item->id }}" @selected($item->id == old($name, $value))>
+            <option value="{{ $item->id }}"
+                @if (isset($value))
+                    @selected($item->id == old($name, $value))
+                @else
+                    @selected($item->id == old($name))    
+                @endif
+            >
                 {{ $item->{$show} }}
                 @isset($show2)
                      ({{ $item->{$show2} }})

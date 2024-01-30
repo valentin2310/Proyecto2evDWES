@@ -33,6 +33,9 @@
             <li class="bg-dark"><a href="{{route('empleados.show')}}"><i class="fa-solid fa-list-ul text-danger p-2"></i><br>Ver lista empleados</a></li>
             <li class="bg-dark"><a href="{{route('empleados.create')}}"><i class="fa-solid fa-user-plus text-danger p-2"></i><br>Añadir empleado</a></li>
             <li class="bg-dark"><a href="{{route('clientes.show')}}"><i class="fa-solid fa-list text-info p-2"></i><br>Ver lista clientes</a></li>
+            <li class="bg-dark"><a href="{{route('clientes.create')}}"><i class="fa-solid fa-user-plus text-info p-2"></i><br>Añadir cliente</a></li>
+            <li class="bg-dark"><a href="{{route('cuotas.show')}}"><i class="fa-solid fa-file-contract text-success p-2"></i><br>Ver lista cuotas</a></li>
+            <li class="bg-dark"><a href="{{route('cuotas.create')}}"><i class="fa-solid fa-file-circle-plus text-success p-2"></i><br>Añadir cuota</a></li>
         </ul>
     </div>
 @endsection
