@@ -64,4 +64,10 @@ class CuotaController extends Controller
             'body' => $resultado ? 'La cuota se ha eliminado exitosamente.' : 'Hubo un error al eliminar la cuota'
         ]);
     }
+
+    public function remesaMensual(): RedirectResponse
+    {
+        Cuota::addRemesaMensual();
+        return redirect()->route('cuotas.show');
+    }
 }

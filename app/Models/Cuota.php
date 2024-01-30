@@ -49,4 +49,23 @@ class Cuota extends Model
     {
         return $this->belongsTo(Tarea::class, 'id_tarea', 'id');
     }
+
+    public static function addCuotaMensual(Cliente $cliente)
+    {
+        $cuota = new Cuota();
+
+        $cuota->id_cliente = $cliente->id;
+        $cuota->concepto = 'Cuota mensual';
+        $cuota->importe = $cliente->cuota_mensual;
+
+        $cuota->save();
+    }
+    public static function addRemesaMensual()
+    {
+        $lista = Cliente::all();
+
+        foreach ($lista as $cli) {
+            self::addCuotaMensual($cli);
+        }
+    }
 }

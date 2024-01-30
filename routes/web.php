@@ -77,6 +77,8 @@ Route::controller(CuotaController::class)->group(function(){
     Route::get('cuotas/create', 'create')->name('cuotas.create');
     Route::post('cuotas/create', 'store')->name('cuotas.store');
 
+    Route::post('cuotas/remesa', 'remesaMensual')->name('cuotas.remesa');
+
     Route::get('cuotas/{cuota}/edit', 'edit')->name('cuotas.edit');
     Route::put('cuotas/{cuota}/edit', 'update')->name('cuotas.update');
 

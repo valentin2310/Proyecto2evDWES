@@ -12,11 +12,22 @@
 @section('contenido')
     <h1>Aquí se muestran todas las cuotas</h1>
 
-    <button class="btn btn-dark my-3">
-        <a href="{{ route('cuotas.create') }}" class="text-decoration-none text-white">
-            <i class="fa-solid fa-user-plus text-info me-2"></i>Añadir cuota
-        </a>
-    </button>
+    <div class="botones d-flex gap-1">
+        <button class="btn btn-dark my-3">
+            <a href="{{ route('cuotas.create') }}" class="text-decoration-none text-white">
+                <i class="fa-solid fa-user-plus text-info me-2"></i>Añadir cuota
+            </a>
+        </button>
+    
+        <form action="{{ route('cuotas.remesa') }}" method="POST">
+            @csrf
+    
+            <button class="btn btn-dark text-white my-3">
+                <i class="fa-solid fa-file-invoice-dollar text-info me-2"></i>
+                Remesa mensual
+            </button>
+        </form>
+    </div>
 
     <div class="info-busqueda">
         <p class="fw-bold">Hay {{ $cuotas->count() }} resultados:</p>
@@ -42,7 +53,7 @@
                         <td>#{{ $item->id }}</td>
                         <td>{{ $item->cliente->nombre }}</td>
                         <td>{{ $item->concepto }}</td>
-                        <td>{{ $item->importe }}</td>
+                        <td>{{ $item->importe }}€</td>
                         <td>{{ $item->tarea ? 'Si' : 'No' }}</td>
                         <td>{{ $item->fecha_emision->format('d/m/Y') }}</td>
                         <td>{{ $item->pagada ? 'Si' : 'No' }}</td>
