@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 use PhpParser\Node\Expr\Cast\Bool_;
 
-class Empleado extends Model
+class Empleado extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $table = 'empleados';
     protected $fillable = [
@@ -20,7 +22,16 @@ class Empleado extends Model
         'telefono',
         'direccion',
         'tipo',
-        'passwd'
+        'password',
+        'ultimo_login'
+    ];
+     /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'password' => 'hashed',
     ];
 
     const CREATED_AT = 'fecha_creacion';

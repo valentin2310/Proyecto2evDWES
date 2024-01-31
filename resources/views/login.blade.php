@@ -1,8 +1,8 @@
 <?php
 /**
- * Autor: Valentin Andrei Culea
- * Fecha: 07/12/2023
- * Versión 1
+ * @author: Valentin Andrei Culea
+ * @date: 30/01/2024
+ * @version 2
  */
 ?>
 @extends('layouts.simple')
@@ -17,39 +17,20 @@
                 <i class="fa-solid fa-circle-user my-3"></i>
             </div>
             <h2 class="login-titulo mb-5 text-center">Iniciar sesión</h2>
-            @if (isset($gestor_err) && $gestor_err->hayError('login'))
-                <div class="alert alert-danger d-flex align-items-center">
-                    <i class='fa-solid fa-circle-exclamation fs-2 me-3'></i>
-                    <div class="">
-                        {{ $gestor_err->getMensajeError('login') }}
-                    </div>
+            <form action="{{ route('login.auth') }}" method="POST" class="login-cuerpo">
+                @csrf
+
+                <div class="row m-0">
+                    <x-form_control 
+                        name="correo" label="Email"
+                        icon="fa-solid fa-envelope"
+                    />
+                    <x-form_control 
+                        name="password" label="Contraseña" 
+                        type="password" icon="fa-solid fa-key"
+                    />
                 </div>
-            @endif
-            <form action="{{ route('login.login') }}" method="POST" class="login-cuerpo">
-                <div class="mb-4">
-                    <label class="form-label"><i class="fa-solid fa-user me-2"></i>Usuario</label>
-                    <input type="text" name="usuario" class="form-control"
-                        @if (isset($request))
-                            value="{{ $request['usuario'] }}"
-                        @elseif(isset($ultimo_login))
-                            value="{{ $ultimo_login }}"
-                        @endif
-                    >
-                    @if (isset($gestor_err) && $gestor_err->hayError('usuario'))
-                        <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('usuario') }}</small>
-                    @endif
-                </div>
-                <div class="mb-4">
-                    <label class="form-label"><i class="fa-solid fa-key me-2"></i>Contraseña</label>
-                    <input type="password" name="password" class="form-control"
-                        @isset ($request)
-                            value="{{ $request['password'] }}"
-                        @endisset
-                    >
-                    @if (isset($gestor_err) && $gestor_err->hayError('password'))
-                    <small class='text-danger float-end'><i class='fa-solid fa-circle-exclamation'></i> {{ $gestor_err->getMensajeError('password') }}</small>
-                @endif
-                </div>
+               
                 <div class="form-check mt-5 mb-2">
                     <input type="checkbox" name="recordar" class="form-check-input">
                     <label class="form-check-label">Recordar credenciales de inicio de sesión

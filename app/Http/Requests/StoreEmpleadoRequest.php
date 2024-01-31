@@ -35,8 +35,8 @@ class StoreEmpleadoRequest extends FormRequest
             ], 
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9', 
             'tipo' => 'required|regex:/^[01]{1}$/',
-            'passwd' => 'required|min:3|same:passwd_2',
-            'passwd_2' => 'required|min:3'
+            'password' => 'required|min:3|same:password_2',
+            'password_2' => 'required|min:3'
         ];
     }
 

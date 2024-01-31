@@ -40,7 +40,12 @@
                         <td>{{ $item->contacto }}</td>
                         <td>{{ $item->fecha_creacion->format('d/m/Y') }}</td>
                         <td>{{ $item->fecha_realizacion ?? 'Sin fecha'}}</td>
-                        <td class="text-center d-flex gap-1">
+                        <td class="text-center d-flex flex-wrap gap-1">
+                            <button class="btn btn-dark" title="Completar la tarea">
+                                <a href="{{ route('tareas.completar', $item->id) }}" class="text-decoration-none text-success">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </a>
+                            </button>
                             <button class="btn btn-dark" title="Ver toda la información de la tarea">
                                 <a href="{{ route('tareas.show', $item->id) }}" class="text-decoration-none text-primary">
                                     <i class="fa-solid fa-eye"></i>
@@ -51,13 +56,11 @@
                                     <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </button>
-                            @if (isset($usuario) && $usuario->esAdmin())
-                                <button class="btn btn-dark" title="Modificar la tarea">
-                                   {{--  <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
-                                    </a> --}}
+                            <button class="btn btn-dark" title="Modificar la tarea">
+                                <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
                                     <i class="fa-solid fa-pen"></i>
-                                </button>
-                            @endif
+                                </a>
+                            </button>
                         </td>
                     </tr>
                 @endforeach

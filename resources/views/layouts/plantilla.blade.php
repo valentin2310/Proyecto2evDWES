@@ -22,24 +22,10 @@
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 </head>
 <body>
-    <header>
-        <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="m-0 p-0"><i class="fa-solid fa-building me-2"></i>Bunglebuild S.L.</h1>
-            <div class="text-end">
-                @if (isset($usuario))
-                    <p class="m-0 fs-5">Has iniciado sesión con <span class="fw-bold">{{ $usuario->usuario }}</span><span class="fw-bold fst-italic text-dark">#{{ $usuario->id }}</span></p>
-                    <p class="m-0">
-                        Estás en modo: <span class="fw-bold">{{ $usuario->tipo == 0 ? 'ADMINISTRADOR' : 'OPERADOR' }}</span>
-                        <span class="px-3">|</span>
-                        Último inicio de sesión: <span class="fw-bold">{{ $usuario->ultimo_login }}</span>
-                    </p>
-                    <form action="{{ route('login.logout') }}" method="POST">
-                        <button type="submit" class="mt-2 btn btn-dark"><i class="fa-solid fa-right-to-bracket me-2"></i>Cerrar sesión</button>
-                    </form>
-                @endif
-            </div>
-        </div>
-    </header>
+    
+    <x-cabecera>
+        
+    </x-cabecera>
     
     <main class="container">
         <nav>

@@ -60,19 +60,19 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label"><i class="fa-solid fa-key me-2"></i>Contraseña:</label>
-                    <input type="password" name="passwd" class="form-control"
-                       value="{{ old('passwd') }}"
+                    <input type="password" name="password" class="form-control"
+                       value="{{ old('password') }}"
                     >
-                    @error('passwd')
+                    @error('password')
                         <x-msg_error :message="$message" />
                     @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label"><i class="fa-solid fa-key me-2"></i>Repite la contraseña:</label>
-                    <input type="password" name="passwd_2" class="form-control"
-                       value="{{ old('passwd_2') }}"
+                    <input type="password" name="password_2" class="form-control"
+                       value="{{ old('password_2') }}"
                     >
-                    @error('passwd_2')
+                    @error('password_2')
                         <x-msg_error :message="$message" />
                     @enderror
                 </div>
