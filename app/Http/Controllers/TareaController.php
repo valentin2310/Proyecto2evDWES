@@ -29,9 +29,9 @@ class TareaController extends Controller
     {
         return view('tareas/create', [
             'optionsEstado' => Tarea::OPTIONS_ESTADOS,
-            'listaProvincias' => Provincia::all(),
-            'listaOperarios' => Empleado::getOperarios(),
-            'listaClientes' => Cliente::all()
+            'provincias' => Provincia::all(),
+            'operarios' => Empleado::getOperarios(),
+            'clientes' => Cliente::all()
         ]);
     }
 
@@ -49,9 +49,9 @@ class TareaController extends Controller
         return view('tareas/edit', [
             'tarea' => $tarea,
             'optionsEstado' => Tarea::OPTIONS_ESTADOS,
-            'listaProvincias' => Provincia::all(),
-            'listaOperarios' => Empleado::getOperarios(),
-            'listaClientes' => Cliente::all()
+            'provincias' => Provincia::all(),
+            'operarios' => Empleado::getOperarios(),
+            'clientes' => Cliente::all()
         ]);
     }
 

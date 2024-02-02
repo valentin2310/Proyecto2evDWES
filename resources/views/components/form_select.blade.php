@@ -11,7 +11,12 @@
 ])
 
 <div class="col-md-{{ $col }} mb-3">
-    <label class="form-label"><i class="{{ $icon }} me-2"></i>{{ $label }}:</label>
+    <label class="form-label">
+        @isset($icon)
+            <i class="{{ $icon }} me-2"></i>
+        @endisset
+        {{ $label }}:
+    </label>
     <select name="{{ $name }}" class="form-select">
         @foreach ($list as $item)
             <option value="{{ $item->id }}"
