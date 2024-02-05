@@ -16,7 +16,6 @@
     <h1>Añadir una tarea</h1>
         
     <form action="{{ route('tareas.store') }}" method="POST" class="form bg-dark text-white p-4 rounded">
-
         @csrf
     
         <fieldset>
@@ -31,11 +30,15 @@
                     name="fecha_realizacion" label="Fecha realización"
                     col="7"
                 />
-                <x-form_select 
-                    name="id_operario" label="Operario"
-                    :list="$operarios"
-                    col="5" show="nombre"
-                />
+                @auth
+                    @if (Auth::user()->esAdmin())
+                        <x-form_select 
+                            name="id_operario" label="Operario"
+                            :list="$operarios"
+                            col="5" show="nombre"
+                        />
+                    @endif
+                @endauth
                 <x-form_control 
                     name="nif" label="NIF facturador"
                     col="7"
@@ -97,6 +100,24 @@
                 </div>
             </div>
         </fieldset>
+
+        @guest
+            <input type="hidden" name="v_user" value="1">
+            <fieldset>
+                <legend class="text-azul">Verifica tu identidad</legend>
+                <div class="row m-0 p-2">
+                    <x-form_control 
+                        name="v_cif" label="CIF"
+                        col="6" placeholder="Introduce tu cif.."
+                    />
+                    <x-form_control 
+                        name="v_telefono" label="Teléfono"
+                        col="6" placeholder="Introduce tu número de teléfono.."
+                    />
+                </div>
+            </fieldset>
+        @endguest
+
         
         <div class="text-center">
             <button type="submit" class="btn btn-primary my-3"><i class="fa-solid fa-floppy-disk me-2"></i>Guardar tarea</button>

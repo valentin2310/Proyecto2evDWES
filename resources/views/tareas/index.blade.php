@@ -1,8 +1,8 @@
 <?php
 /**
- * Autor: Valentin Andrei Culea
- * Fecha: 07/12/2023
- * Versión 1
+ * @author: Valentin Andrei Culea
+ * @date 31/01/2024
+ * @version 3
  */
 ?>
 @extends('layouts.plantilla')
@@ -35,12 +35,16 @@
                         <td>#{{ $item->id }}</td>
                         <td>{{ $item->nif }}</td>
                         <td>{{ $item->estado }}</td>
-                        <td>{{ $item->operario->nombre }}</td>
+                        @if ($item->operario)
+                            <td>{{ $item->operario->nombre}}</td>
+                        @else
+                            <td><span class="rounded bg-danger text-white p-1 px-2">Sin operario</span></td>
+                        @endif
                         <td>{{ $item->descripcion }}</td>
                         <td>{{ $item->contacto }}</td>
                         <td>{{ $item->fecha_creacion->format('d/m/Y') }}</td>
                         <td>{{ $item->fecha_realizacion ?? 'Sin fecha'}}</td>
-                        <td class="text-center d-flex flex-wrap gap-1">
+                        <td class="text-center d-flex flex-wrap justify-content-around gap-1">
                             <button class="btn btn-dark" title="Completar la tarea">
                                 <a href="{{ route('tareas.completar', $item->id) }}" class="text-decoration-none text-success">
                                     <i class="fa-solid fa-circle-check"></i>
@@ -51,14 +55,14 @@
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
                             </button>
-                            <button class="btn btn-dark" title="Eliminar la tarea">
-                                <a href="{{ route('tareas.delete', $item->id) }}" class="text-decoration-none text-danger">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                            </button>
                             <button class="btn btn-dark" title="Modificar la tarea">
                                 <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
                                     <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </button>
+                            <button class="btn btn-dark" title="Eliminar la tarea">
+                                <a href="{{ route('tareas.delete', $item->id) }}" class="text-decoration-none text-danger">
+                                    <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </button>
                         </td>
