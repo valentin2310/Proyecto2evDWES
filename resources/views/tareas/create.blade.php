@@ -21,27 +21,31 @@
         <fieldset>
             <legend class="text-azul">Datos de la tarea</legend>
             <div class="row m-0 p-2">
-                <x-form_select 
-                    name="id_cliente" label="Cliente"
-                    :list="$clientes"
-                    col="5" show="nombre"
-                />
+                @auth
+                    @if (Auth::user()->esAdmin())
+                        <x-form_select 
+                            name="id_cliente" label="Cliente"
+                            :list="$clientes"
+                            col="6" show="nombre"
+                        />
+                    @endif
+                @endauth
                 <x-form_control 
                     name="fecha_realizacion" label="Fecha realización"
-                    col="7"
+                    col="6"
                 />
                 @auth
                     @if (Auth::user()->esAdmin())
                         <x-form_select 
                             name="id_operario" label="Operario"
                             :list="$operarios"
-                            col="5" show="nombre"
+                            col="6" show="nombre"
                         />
                     @endif
                 @endauth
                 <x-form_control 
                     name="nif" label="NIF facturador"
-                    col="7"
+                    col="6"
                 />
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Descripción</label>
