@@ -49,6 +49,14 @@ class Cliente extends Model
             set: fn (string $value) => strtolower($value),
         );
     }
+    protected function cuotaMensual(): Attribute
+    {
+        return Attribute::make(
+            get: function($value){
+                return round((currency_value($this->moneda->code) * $value), 2);
+            }
+        );
+    }
 
     public function cuotas(): HasMany
     {

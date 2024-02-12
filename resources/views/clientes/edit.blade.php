@@ -83,7 +83,7 @@
                 >
                 </x-form_select>
                 <x-form_control 
-                    name="cuota_mensual" label="Cuota mensual"
+                    name="cuota_mensual" label="(€) Cuota mensual"
                     :value="$cliente->cuota_mensual"
                     icon="fa-solid fa-sack-dollar" col="4" 
                     type="number" step="0.001" value="0"

@@ -40,6 +40,14 @@ class Cuota extends Model
             }
         );
     }
+    protected function importe(): Attribute
+    {
+        return Attribute::make(
+            get: function($value){
+                return round((currency_value($this->cliente->moneda->code) * $value), 2);
+            }
+        );
+    }
 
     public function cliente(): BelongsTo
     {

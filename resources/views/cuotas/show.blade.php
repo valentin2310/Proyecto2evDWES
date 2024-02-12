@@ -53,7 +53,7 @@
                         <td>#{{ $item->id }}</td>
                         <td>{{ $item->cliente->nombre }}</td>
                         <td>{{ $item->concepto }}</td>
-                        <td>{{ $item->importe }}€</td>
+                        <td>{{ $item->importe }} {{ $item->cliente->moneda->symbol }}</td>
                         <td>{{ $item->tarea ? 'Si' : 'No' }}</td>
                         <td>{{ $item->fecha_emision->format('d/m/Y') }}</td>
                         <td>{{ $item->pagada ? 'Si' : 'No' }}</td>
