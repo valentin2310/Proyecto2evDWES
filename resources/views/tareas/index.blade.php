@@ -2,7 +2,7 @@
 /**
  * @author: Valentin Andrei Culea
  * @date 31/01/2024
- * @version 3
+ * @version 2
  */
 ?>
 @extends('layouts.plantilla')
@@ -45,24 +45,27 @@
                         <td>{{ $item->fecha_creacion->format('d/m/Y') }}</td>
                         <td>{{ $item->fecha_realizacion ?? 'Sin fecha'}}</td>
                         <td class="text-center d-flex flex-wrap justify-content-around gap-1">
-                            <button class="btn btn-dark" title="Completar la tarea">
-                                <a href="{{ route('tareas.completar', $item->id) }}" class="text-decoration-none text-success">
-                                    <i class="fa-solid fa-circle-check"></i>
-                                </a>
-                            </button>
+                            @if (Auth::user()->esAdmin())
+                                <button class="btn btn-dark" title="Modificar la tarea">
+                                    <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                </button>
+                                <button class="btn btn-dark" title="Eliminar la tarea">
+                                    <a href="{{ route('tareas.delete', $item->id) }}" class="text-decoration-none text-danger">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </button>
+                            @else    
+                                <button class="btn btn-dark" title="Completar la tarea">
+                                    <a href="{{ route('tareas.completar', $item->id) }}" class="text-decoration-none text-success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </a>
+                                </button>
+                            @endif
                             <button class="btn btn-dark" title="Ver toda la información de la tarea">
                                 <a href="{{ route('tareas.show', $item->id) }}" class="text-decoration-none text-primary">
                                     <i class="fa-solid fa-eye"></i>
-                                </a>
-                            </button>
-                            <button class="btn btn-dark" title="Modificar la tarea">
-                                <a href="{{ route('tareas.edit', $item->id) }}" class="text-decoration-none text-warning">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                            </button>
-                            <button class="btn btn-dark" title="Eliminar la tarea">
-                                <a href="{{ route('tareas.delete', $item->id) }}" class="text-decoration-none text-danger">
-                                    <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </button>
                         </td>
@@ -71,22 +74,6 @@
             </tbody>
         </table>
     </div>
-
-    {{-- <div class="paginacion my-3 d-flex gap-3 align-items-center justify-content-center">
-        @if ($page > 1)
-            <button class="btn btn-dark"><a href="{{ route('tareas.index', ['page'=>$page-1]) }}" class="text-decoration-none text-white">Anterior</a></button>
-        @else
-            <button class="btn btn-dark" disabled>Anterior</button>
-        @endif
-
-        <p class="m-0">Página actual: <span class="fw-bold text-azul">{{ $page }}</span></p>
-
-        @if ($page < $paginas)
-            <button class="btn btn-dark"><a href="{{ route('tareas.index', ['page'=>$page+1]) }}" class="text-decoration-none text-white">Siguiente</a></button>
-        @else
-            <button class="btn btn-dark" disabled>Siguiente</button>
-        @endif
-    </div> --}}
 
     {{ $tareas->links() }}
 

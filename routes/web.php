@@ -32,7 +32,7 @@ Route::controller(LoginController::class)->group(function() {
 });
 
 Route::controller(TareaController::class)->group(function () {
-    Route::get('tareas', 'index')->name('tareas.index');
+    Route::get('tareas', 'index')->name('tareas.index')->middleware('auth');
 
     Route::get('tareas/create', 'create')->name('tareas.create');
     Route::post('tareas/create', 'store')->name('tareas.store');
@@ -41,16 +41,16 @@ Route::controller(TareaController::class)->group(function () {
     Route::get('tareas/search', 'search')->name('tareas.search');
     */
 
-    Route::get('tareas/{tarea}', 'show')->name('tareas.show');
+    Route::get('tareas/{tarea}', 'show')->name('tareas.show')->middleware('auth');
     
-    Route::get('tareas/{tarea}/completar', 'completar')->name('tareas.completar');
-    Route::put('tareas/{tarea}/completar', 'completarUpdate')->name('tareas.completarUpdate');
+    Route::get('tareas/{tarea}/completar', 'completar')->name('tareas.completar')->middleware('auth');
+    Route::put('tareas/{tarea}/completar', 'completarUpdate')->name('tareas.completarUpdate')->middleware('auth');
     
-    Route::get('tareas/{tarea}/edit', 'edit')->name('tareas.edit');
-    Route::put('tareas/{tarea}', 'update')->name('tareas.update');
+    Route::get('tareas/{tarea}/edit', 'edit')->name('tareas.edit')->middleware('auth, isAdmin');
+    Route::put('tareas/{tarea}', 'update')->name('tareas.update')->middleware('auth, isAdmin');
 
-    Route::get('tareas/{tarea}/delete', 'delete')->name('tareas.delete');
-    Route::delete('tareas/{tarea}/delete', 'destroy')->name('tareas.destroy');
+    Route::get('tareas/{tarea}/delete', 'delete')->name('tareas.delete')->middleware('auth, isAdmin');
+    Route::delete('tareas/{tarea}/delete', 'destroy')->name('tareas.destroy')->middleware('auth, isAdmin');
 });
 
 Route::controller(EmpleadoController::class)->group(function(){
@@ -64,7 +64,8 @@ Route::controller(EmpleadoController::class)->group(function(){
     
     Route::get('empleados/{empleado}/delete', 'delete')->name('empleados.delete');
     Route::delete('empleados/{empleado}/delete', 'destroy')->name('empleados.destroy');
-});
+
+})->middleware('auth, isAdmin');
 
 Route::controller(ClienteController::class)->group(function(){
     Route::get('clientes', 'show')->name('clientes.show');
@@ -77,7 +78,8 @@ Route::controller(ClienteController::class)->group(function(){
 
     Route::get('clientes/{cliente}/delete', 'delete')->name('clientes.delete');
     Route::delete('clientes/{cliente}/delete', 'destroy')->name('clientes.destroy');
-});
+
+})->middleware('auth, isAdmin');
 
 Route::controller(CuotaController::class)->group(function(){
     Route::get('cuotas', 'show')->name('cuotas.show');
@@ -92,7 +94,8 @@ Route::controller(CuotaController::class)->group(function(){
 
     Route::get('cuotas/{cuota}/delete', 'delete')->name('cuotas.delete');
     Route::delete('cuotas/{cuota}/delete', 'destroy')->name('cuotas.destroy');
-});
+
+})->middleware('auth, isAdmin');
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');
 
