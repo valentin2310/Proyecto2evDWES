@@ -61,6 +61,16 @@
                         <td>{{ $item->notas }}</td>
                         <td class="text-center">
                             <button class="btn btn-dark" title="Corregir cuota">
+                                <a href="{{ route('cuotas.pdf', $item->id) }}" class="text-decoration-none text-info">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </a>
+                            </button>
+                            {{-- <button class="btn btn-dark" title="Corregir cuota">
+                                <a href="{{ route('mail.factura', $item->id) }}" class="text-decoration-none text-info">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </a>
+                            </button> --}}
+                            <button class="btn btn-dark" title="Corregir cuota">
                                 <a href="{{ route('cuotas.edit', $item->id) }}" class="text-decoration-none text-warning">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>

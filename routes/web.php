@@ -8,6 +8,7 @@ use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TareaController;
 use App\Mail\SendFactura;
+use App\Models\Cuota;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -89,6 +90,8 @@ Route::controller(CuotaController::class)->group(function(){
 
     Route::post('cuotas/remesa', 'remesaMensual')->name('cuotas.remesa');
 
+    Route::get('cuotas/{cuota}/pdf', 'pdf')->name('cuotas.pdf');
+
     Route::get('cuotas/{cuota}/edit', 'edit')->name('cuotas.edit');
     Route::put('cuotas/{cuota}/edit', 'update')->name('cuotas.update');
 
@@ -99,10 +102,11 @@ Route::controller(CuotaController::class)->group(function(){
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');
 
-/* Route::get('factura', function(){
+/* Route::get('factura/{cuota}', function(Cuota $cuota){
 
     // Mailtrap.com
-    Mail::to('pepito@nosecaen.com')->send(new SendFactura);
+
+    Mail::to($cuota->cliente->correo)->send(new SendFactura($cuota));
     return 'Mensaje enviado';
 
 })->name('mail.factura'); */

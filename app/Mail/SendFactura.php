@@ -2,10 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Cuota;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -17,7 +20,7 @@ class SendFactura extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public $data,)
     {
         //
     }
@@ -39,7 +42,8 @@ class SendFactura extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.factura',
+            view: 'cuotas.pdf',
+            with: $this->data
         );
     }
 
@@ -50,6 +54,9 @@ class SendFactura extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromData(fn () => $this->data['pdf']->output(), 'Factura.pdf')
+                ->withMime('application/pdf'),
+        ];
     }
 }

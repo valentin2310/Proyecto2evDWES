@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCuotaRequest;
+use App\Mail\SendFactura;
 use App\Models\Cliente;
 use App\Models\Cuota;
 use App\Models\Tarea;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 
 class CuotaController extends Controller
 {
@@ -68,6 +72,18 @@ class CuotaController extends Controller
     public function remesaMensual(): RedirectResponse
     {
         Cuota::addRemesaMensual();
+        return redirect()->route('cuotas.show');
+    }
+
+    public function pdf(Cuota $cuota)
+    {
+        $pdf = Pdf::loadView('cuotas.pdf', compact('cuota'));
+
+        $data["cuota"] = $cuota;
+        $data["pdf"] = $pdf;
+
+        Mail::to($cuota->cliente->correo)->send(new SendFactura($data));
+
         return redirect()->route('cuotas.show');
     }
 }
