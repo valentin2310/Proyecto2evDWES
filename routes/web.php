@@ -6,11 +6,13 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\TareaController;
 use App\Mail\SendFactura;
 use App\Models\Cuota;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,16 @@ Route::controller(LoginController::class)->group(function() {
     Route::post('login', 'authenticate')->name('login.auth');
 
     Route::post('logout', 'logout')->name('logout');
+});
+
+Route::get('/login/google/redirect', function(){
+    return Socialite::driver('google')->redirect();
+})->name('login.google');
+
+Route::get('/login/google/callback', function(){
+    $user = Socialite::driver('google')->user();
+
+    dd($user);
 });
 
 Route::controller(TareaController::class)->group(function () {
@@ -102,11 +114,6 @@ Route::controller(CuotaController::class)->group(function(){
 
 Route::get('info/{title}:{body}', InfoController::class)->name('info');
 
-/* Route::get('factura/{cuota}', function(Cuota $cuota){
-
-    // Mailtrap.com
-
-    Mail::to($cuota->cliente->correo)->send(new SendFactura($cuota));
-    return 'Mensaje enviado';
-
-})->name('mail.factura'); */
+Route::get('/paypal/{cuota}/pay', [PaypalController::class, 'pay'])->name('paypal.pay');
+Route::get('/paypal/{cuota}/status', [PaypalController::class, 'status'])->name('paypal.status');
+Route::get('/paypal/result', [PaypalController::class, 'result'])->name('paypal.result');

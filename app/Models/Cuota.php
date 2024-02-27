@@ -40,13 +40,10 @@ class Cuota extends Model
             }
         );
     }
-    protected function importe(): Attribute
+
+    public function importeCurrency()
     {
-        return Attribute::make(
-            get: function($value){
-                return round((currency_value($this->cliente->moneda->code) * $value), 2);
-            }
-        );
+        return round((currency_value($this->cliente->moneda->code) * $this->importe), 2);
     }
 
     public function cliente(): BelongsTo
@@ -75,5 +72,12 @@ class Cuota extends Model
         foreach ($lista as $cli) {
             self::addCuotaMensual($cli);
         }
+    }
+
+    public function pagar(){
+        $this->update([
+            'pagada' => true,
+            'fecha_pago' => Carbon::now()->format('d/m/Y')
+        ]);
     }
 }

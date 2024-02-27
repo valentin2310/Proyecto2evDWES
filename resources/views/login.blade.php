@@ -20,6 +20,12 @@
             <form action="{{ route('login.auth') }}" method="POST" class="login-cuerpo">
                 @csrf
 
+                <div class="other-auth mb-5">
+                    <a class="btn btn-primary" href="{{ route('login.google') }}">
+                        Google
+                    </a>
+                </div>
+
                 <div class="row m-0">
                     <x-form_control 
                         name="correo" label="Email"

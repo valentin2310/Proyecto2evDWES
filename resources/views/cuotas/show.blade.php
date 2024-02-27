@@ -53,23 +53,25 @@
                         <td>#{{ $item->id }}</td>
                         <td>{{ $item->cliente->nombre }}</td>
                         <td>{{ $item->concepto }}</td>
-                        <td>{{ $item->importe }} {{ $item->cliente->moneda->symbol }}</td>
+                        <td>{{ $item->importeCurrency() }} {{ $item->cliente->moneda->symbol }}</td>
                         <td>{{ $item->tarea ? 'Si' : 'No' }}</td>
                         <td>{{ $item->fecha_emision->format('d/m/Y') }}</td>
                         <td>{{ $item->pagada ? 'Si' : 'No' }}</td>
                         <td>{{ $item->fecha_pago }}</td>
                         <td>{{ $item->notas }}</td>
                         <td class="text-center">
-                            <button class="btn btn-dark" title="Corregir cuota">
+                            <button class="btn btn-dark" title="Mandar factura">
                                 <a href="{{ route('cuotas.pdf', $item->id) }}" class="text-decoration-none text-info">
                                     <i class="fa-solid fa-file-pdf"></i>
                                 </a>
                             </button>
-                            {{-- <button class="btn btn-dark" title="Corregir cuota">
-                                <a href="{{ route('mail.factura', $item->id) }}" class="text-decoration-none text-info">
-                                    <i class="fa-solid fa-file-pdf"></i>
-                                </a>
-                            </button> --}}
+                            @if (!$item->pagada)
+                                <button class="btn btn-dark" title="Pagar cuota">
+                                    <a href="{{ route('paypal.pay', $item->id) }}" class="text-decoration-none text-primary">
+                                        <i class="fa-brands fa-paypal"></i>
+                                    </a>
+                                </button>
+                            @endif
                             <button class="btn btn-dark" title="Corregir cuota">
                                 <a href="{{ route('cuotas.edit', $item->id) }}" class="text-decoration-none text-warning">
                                     <i class="fa-solid fa-pen"></i>
