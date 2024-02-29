@@ -75,7 +75,7 @@ class CuotaController extends Controller
         return redirect()->route('cuotas.show');
     }
 
-    public function pdf(Cuota $cuota)
+    public function correo(Cuota $cuota)
     {
         $pdf = Pdf::loadView('cuotas.pdf', compact('cuota'));
 
@@ -85,5 +85,11 @@ class CuotaController extends Controller
         Mail::to($cuota->cliente->correo)->send(new SendFactura($data));
 
         return redirect()->route('cuotas.show');
+    }
+   
+    public function pdf(Cuota $cuota)
+    {
+        $pdf = Pdf::loadView('cuotas.pdf', compact('cuota'));
+        return $pdf->stream();
     }
 }

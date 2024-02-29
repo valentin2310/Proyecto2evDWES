@@ -103,6 +103,7 @@ Route::controller(CuotaController::class)->group(function(){
     Route::post('cuotas/remesa', 'remesaMensual')->name('cuotas.remesa');
 
     Route::get('cuotas/{cuota}/pdf', 'pdf')->name('cuotas.pdf');
+    Route::get('cuotas/{cuota}/correo', 'correo')->name('cuotas.correo');
 
     Route::get('cuotas/{cuota}/edit', 'edit')->name('cuotas.edit');
     Route::put('cuotas/{cuota}/edit', 'update')->name('cuotas.update');

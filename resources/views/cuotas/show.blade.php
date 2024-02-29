@@ -60,9 +60,14 @@
                         <td>{{ $item->fecha_pago }}</td>
                         <td>{{ $item->notas }}</td>
                         <td class="text-center">
-                            <button class="btn btn-dark" title="Mandar factura">
-                                <a href="{{ route('cuotas.pdf', $item->id) }}" class="text-decoration-none text-info">
+                            <button class="btn btn-dark" title="Ver pdf">
+                                <a href="{{ route('cuotas.pdf', $item->id) }}" class="text-decoration-none text-white">
                                     <i class="fa-solid fa-file-pdf"></i>
+                                </a>
+                            </button>
+                            <button class="btn btn-dark" title="Mandar factura">
+                                <a href="{{ route('cuotas.correo', $item->id) }}" class="text-decoration-none text-info">
+                                    <i class="fa-solid fa-envelope"></i>
                                 </a>
                             </button>
                             @if (!$item->pagada)

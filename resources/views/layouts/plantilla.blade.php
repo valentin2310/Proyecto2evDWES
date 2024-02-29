@@ -30,24 +30,24 @@
     <main class="container">
         <nav>
             <ul>
-                <li><a href="/" class="{{ request()->routeIs('home') ? 'active' : '' }}"># Inicio</a></li>
-                <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Ver lista tareas</a></li>
-                <li><a href="{{route('tareas.create')}}" class="{{ request()->routeIs('tareas.create') ? 'active' : '' }}"># Añadir tarea</a></li>
-                <li><a href="{{route('empleados.show')}}" class="{{ request()->routeIs('empleados.show') ? 'active' : '' }}"># Ver lista empleados</a></li>
-                <li><a href="{{route('empleados.create')}}" class="{{ request()->routeIs('empleados.create') ? 'active' : '' }}"># Añadir empleado</a></li>
-                <li><a href="{{route('clientes.show')}}" class="{{ request()->routeIs('clientes.show') ? 'active' : '' }}"># Ver lista clientes</a></li>
-                <li><a href="{{route('clientes.create')}}" class="{{ request()->routeIs('clientes.create') ? 'active' : '' }}"># Añadir cliente</a></li>
-                <li><a href="{{route('cuotas.show')}}" class="{{ request()->routeIs('cuotas.show') ? 'active' : '' }}"># Ver lista cuotas</a></li>
-                <li><a href="{{route('cuotas.create')}}" class="{{ request()->routeIs('cuotas.create') ? 'active' : '' }}"># Añadir cuota</a></li>
-                {{-- @if (isset($usuario) && $usuario->esAdmin())
-                    <li><a href="{{route('usuarios.show')}}"># Ver lista usuarios</a></li>
-                    <li><a href="{{route('usuarios.create')}}"># Añadir usuario</a></li>
+                <li><a href="{{route('home')}}" class="{{ request()->routeIs('home') ? 'active' : '' }}"># Inicio</a></li>
+                @auth
+                    <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Ver lista tareas</a></li>
+                    @if (Auth::user()->esAdmin())
+                        <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Buscar o filtrar tareas</a></li>
+                    @endif
+                @endauth
+                @if (!Auth::user() || Auth::user()->esAdmin())
+                    <li><a href="{{route('tareas.create')}}" class="{{ request()->routeIs('tareas.create') ? 'active' : '' }}"># Añadir tarea</a></li>
                 @endif
-                <li><a href="{{route('tareas.index')}}"># Ver lista tareas</a></li>
-                @if (isset($usuario) && $usuario->esAdmin())
-                    <li><a href="{{route('tareas.create')}}"># Añadir tarea</a></li>
-                @endif
-                <li><a href="{{route('tareas.search')}}"># Buscar o filtrar tareas</a></li> --}}
+                @auth
+                    <li><a href="{{route('empleados.show')}}" class="{{ request()->routeIs('empleados.show') ? 'active' : '' }}"># Ver lista empleados</a></li>
+                    <li><a href="{{route('empleados.create')}}" class="{{ request()->routeIs('empleados.create') ? 'active' : '' }}"># Añadir empleado</a></li>
+                    <li><a href="{{route('clientes.show')}}" class="{{ request()->routeIs('clientes.show') ? 'active' : '' }}"># Ver lista clientes</a></li>
+                    <li><a href="{{route('clientes.create')}}" class="{{ request()->routeIs('clientes.create') ? 'active' : '' }}"># Añadir cliente</a></li>
+                    <li><a href="{{route('cuotas.show')}}" class="{{ request()->routeIs('cuotas.show') ? 'active' : '' }}"># Ver lista cuotas</a></li>
+                    <li><a href="{{route('cuotas.create')}}" class="{{ request()->routeIs('cuotas.create') ? 'active' : '' }}"># Añadir cuota</a></li>
+                @endauth
             </ul>
         </nav>
 
