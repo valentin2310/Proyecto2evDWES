@@ -13,6 +13,8 @@
 <div class="d-flex flex-column align-items-center gap-3">
 
     <h1>Modificar empleado</h1>
+
+    {{$errors}}
     
     <form action="{{ route('empleados.update', $empleado->id) }}" method="POST" class="form bg-dark text-white p-4 rounded">
         @csrf
@@ -61,19 +63,19 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label"><i class="fa-solid fa-key me-2"></i>Contraseña:</label>
-                    <input type="password" name="passwd" class="form-control"
-                       value="{{ old('passwd', $empleado->passwd) }}"
+                    <input type="password" name="password" class="form-control"
+                       value="{{ old('password', $empleado->passwd) }}"
                     >
-                    @error('passwd')
+                    @error('password')
                         <x-msg_error :message="$message" />
                     @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label"><i class="fa-solid fa-key me-2"></i>Repite la contraseña:</label>
-                    <input type="password" name="passwd_2" class="form-control"
-                       value="{{ old('passwd_2', $empleado->passwd) }}"
+                    <input type="password" name="password_2" class="form-control"
+                       value="{{ old('password_2', $empleado->passwd) }}"
                     >
-                    @error('passwd_2')
+                    @error('password_2')
                         <x-msg_error :message="$message" />
                     @enderror
                 </div>
