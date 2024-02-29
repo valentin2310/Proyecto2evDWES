@@ -35,6 +35,26 @@ class TareaController extends Controller
         return view('tareas/show', compact('tarea'));
     }
 
+    public function search(Request $request)
+    {
+        if($request->query('valor1')){
+            $campo = $request->query('campo1');
+            $criterio = $request->query('criterio1');
+            $valor = $request->query('valor1');
+
+            $tareas = Tarea::where($campo, $criterio, $valor)
+                ->paginate(10);
+        } else {
+            $tareas = Tarea::paginate(10);
+        }
+
+        return view('tareas/search', [
+            'tareas' => $tareas,
+            'OPTIONS_CAMPOS' => Tarea::OPTIONS_CAMPOS,
+            'OPTIONS_CRITERIOS' => Tarea::OPTIONS_CRITERIOS,
+        ]);
+    }
+
     public function create()
     {
         return view('tareas/create', [

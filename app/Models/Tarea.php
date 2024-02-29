@@ -44,6 +44,28 @@ class Tarea extends Model
         "R"=> "Realizada",
         "C"=> "Cancelada",
     ];
+    // Lista con los campos que puede tener una tarea
+    const OPTIONS_CAMPOS = [
+        'id' => 'ID',
+        'nif' => 'NIF',
+        'contacto' => 'Contacto',
+        'operario' => 'Operario',
+        'telefono' => 'Teléfono',
+        'descripcion' => 'Descripción',
+        'correo' => 'Correo',
+        'estado' => 'Estado',
+        'fecha_realizacion' => 'Fecha realización',
+    ];
+
+    // Lista de criterios por los que se puede buscar una tarea
+    const OPTIONS_CRITERIOS = [
+        'like' => 'Igual',
+        'not like' => 'No igual',
+        '>' => 'Mayor que',
+        '<' => 'Menor que',
+        '>=' => 'Mayor o igual que',
+        '<=' => 'Menor o igual que',
+    ];
     
     protected function contacto(): Attribute
     {

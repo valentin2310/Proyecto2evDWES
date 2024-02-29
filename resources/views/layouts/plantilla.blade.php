@@ -34,7 +34,7 @@
                 @auth
                     <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Ver lista tareas</a></li>
                     @if (Auth::user()->esAdmin())
-                        <li><a href="{{route('tareas.index')}}" class="{{ request()->routeIs('tareas.index') ? 'active' : '' }}"># Buscar o filtrar tareas</a></li>
+                        <li><a href="{{route('tareas.search')}}" class="{{ request()->routeIs('tareas.search') ? 'active' : '' }}"># Buscar o filtrar tareas</a></li>
                     @endif
                 @endauth
                 @if (!Auth::user() || Auth::user()->esAdmin())
