@@ -50,7 +50,7 @@ Route::controller(TareaController::class)->group(function () {
     Route::get('tareas/create', 'create')->name('tareas.create');
     Route::post('tareas/create', 'store')->name('tareas.store');
     
-    Route::get('tareas/search', 'search')->name('tareas.search');
+    Route::get('tareas/search', 'search')->name('tareas.search')->middleware('auth, isAdmin');
 
     Route::get('tareas/{tarea}', 'show')->name('tareas.show')->middleware('auth');
     
