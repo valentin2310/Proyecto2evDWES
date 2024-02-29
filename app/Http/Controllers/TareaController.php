@@ -10,13 +10,23 @@ use App\Models\Provincia;
 use App\Models\Tarea;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TareaController extends Controller
 {
     public function index()
     {
+        $auth = Auth::user();
+        $user = Empleado::find($auth->id);
+
+        if(!$user->esAdmin()){
+            $tareas = Tarea::where('id_operario', '=', $user->id)->paginate(10);
+        }else{
+            $tareas = Tarea::paginate(10);
+        }
+
         return view('tareas/index', [
-            'tareas' => Tarea::paginate(10)
+            'tareas' => $tareas
         ]);
     }
 

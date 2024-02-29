@@ -41,12 +41,14 @@
                     <li><a href="{{route('tareas.create')}}" class="{{ request()->routeIs('tareas.create') ? 'active' : '' }}"># Añadir tarea</a></li>
                 @endif
                 @auth
-                    <li><a href="{{route('empleados.show')}}" class="{{ request()->routeIs('empleados.show') ? 'active' : '' }}"># Ver lista empleados</a></li>
-                    <li><a href="{{route('empleados.create')}}" class="{{ request()->routeIs('empleados.create') ? 'active' : '' }}"># Añadir empleado</a></li>
-                    <li><a href="{{route('clientes.show')}}" class="{{ request()->routeIs('clientes.show') ? 'active' : '' }}"># Ver lista clientes</a></li>
-                    <li><a href="{{route('clientes.create')}}" class="{{ request()->routeIs('clientes.create') ? 'active' : '' }}"># Añadir cliente</a></li>
-                    <li><a href="{{route('cuotas.show')}}" class="{{ request()->routeIs('cuotas.show') ? 'active' : '' }}"># Ver lista cuotas</a></li>
-                    <li><a href="{{route('cuotas.create')}}" class="{{ request()->routeIs('cuotas.create') ? 'active' : '' }}"># Añadir cuota</a></li>
+                    @if (Auth::user()->esAdmin())
+                        <li><a href="{{route('empleados.show')}}" class="{{ request()->routeIs('empleados.show') ? 'active' : '' }}"># Ver lista empleados</a></li>
+                        <li><a href="{{route('empleados.create')}}" class="{{ request()->routeIs('empleados.create') ? 'active' : '' }}"># Añadir empleado</a></li>
+                        <li><a href="{{route('clientes.show')}}" class="{{ request()->routeIs('clientes.show') ? 'active' : '' }}"># Ver lista clientes</a></li>
+                        <li><a href="{{route('clientes.create')}}" class="{{ request()->routeIs('clientes.create') ? 'active' : '' }}"># Añadir cliente</a></li>
+                        <li><a href="{{route('cuotas.show')}}" class="{{ request()->routeIs('cuotas.show') ? 'active' : '' }}"># Ver lista cuotas</a></li>
+                        <li><a href="{{route('cuotas.create')}}" class="{{ request()->routeIs('cuotas.create') ? 'active' : '' }}"># Añadir cuota</a></li>
+                    @endif
                 @endauth
             </ul>
         </nav>

@@ -56,7 +56,7 @@
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </button>
-                            @else    
+                            @elseif($item->estado != 'R')
                                 <button class="btn btn-dark" title="Completar la tarea">
                                     <a href="{{ route('tareas.completar', $item->id) }}" class="text-decoration-none text-success">
                                         <i class="fa-solid fa-circle-check"></i>

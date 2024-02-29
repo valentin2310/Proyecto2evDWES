@@ -25,7 +25,7 @@
                 <p><span class="fw-bold">Estado: </span>{{ $tarea->getEstado() }}</p>
             </div>
             <div class="col-md-6">
-                <p><span class="fw-bold">Cliente: </span>{{ $tarea->cliente->nombre }}</p>
+                <p><span class="fw-bold">Cliente: </span>{{ $tarea->cliente->nombre ?? $tarea->contacto }}</p>
             </div>
             <div class="col-md-6">
                 <p><span class="fw-bold">NIF facturador: </span>{{ $tarea->nif }}</p>
