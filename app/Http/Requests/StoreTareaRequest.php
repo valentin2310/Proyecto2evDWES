@@ -30,7 +30,7 @@ class StoreTareaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_cliente' => 'required',
+            'id_cliente' => 'required_without:v_user',
             'id_operario' => 'required_without:v_user',
             'descripcion' => 'required|min:3',
             'contacto' => 'required|min:3',
@@ -43,6 +43,9 @@ class StoreTareaRequest extends FormRequest
                 function (string $attribute, mixed $value, Closure $fail) {
                     if(!Cliente::where('cif', $value)->where('telefono', $this->input('v_telefono'))->exists()){
                         $fail("Los datos de validación no son correctos");
+                    }else{
+                        $cliente = Cliente::where('cif', $value)->where('telefono', $this->input('v_telefono'))->get()->first();
+                        $this->mergeIfMissing(['id_cliente' => $cliente->id]);
                     }
                 }
             ]
