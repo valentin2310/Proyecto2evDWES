@@ -19,8 +19,10 @@ if (! function_exists('currency_value')){
      */
     function currency_value(string $currency){
         $curr = strtolower($currency);
-        $response = Http::get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/2024-01-05/currencies/eur/$curr.json");
+        $date = 'latest';
+        $apiVersion = 'v1';
+        $response = Http::get("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@$date/$apiVersion/currencies/eur.json");
 
-        return $response[$curr];
+        return $response['eur'][$curr];
     }
 }
