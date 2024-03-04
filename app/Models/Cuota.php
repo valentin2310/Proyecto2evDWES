@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 namespace App\Models;
 
 use Carbon\Carbon;
@@ -13,7 +16,7 @@ class Cuota extends Model
     use HasFactory;
 
     protected $table = 'cuotas';
-
+    // Campos que permitimos que sean rellenables a través de un formulario.
     protected $fillable = [
         'concepto',
         'fecha_pago',
@@ -27,6 +30,12 @@ class Cuota extends Model
     const CREATED_AT = 'fecha_emision';
     const UPDATED_AT = 'fecha_actualizacion';
 
+     /**
+     * Atributo que devuelve la fecha en diferentes formatos.
+     * La muestra como d/m/Y y la inserta como Y-m-d
+     * 
+     * @return Attribute
+     */
     protected function fechaPago(): Attribute
     {
         return Attribute::make(
@@ -40,21 +49,42 @@ class Cuota extends Model
             }
         );
     }
-
+    /**
+     * Atributo que devuelve el importe con el valor de la moneda del cliente.
+     * Hace uso del helper currency_value.
+     * 
+     * @return number
+     */
     public function importeCurrency()
     {
         return round((currency_value($this->cliente->moneda->code) * $this->importe), 2);
     }
-
+    /**
+     * Relacion Many to One.
+     * Devuelve el cliente que posee dicha cuota.
+     * 
+     * @return BelongsTo
+     */
     public function cliente(): BelongsTo
     {
         return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
     }
+    /**
+     * Relacion Many to One.
+     * Devuelve la tarea de la cual se efectúa dicha cuota.
+     * 
+     * @return BelongsTo
+     */
     public function tarea(): BelongsTo
     {
         return $this->belongsTo(Tarea::class, 'id_tarea', 'id');
     }
-
+    /**
+     * Crea una cuota con los datos del cliente.
+     * 
+     * @param Cliente $cliente
+     * @return void
+     */
     public static function addCuotaMensual(Cliente $cliente)
     {
         $cuota = new Cuota();
@@ -65,6 +95,11 @@ class Cuota extends Model
 
         $cuota->save();
     }
+    /**
+     * Hace uso de la función addCuotaMensual para crear una cuota para cada cliente.
+     * 
+     * @return void
+     */
     public static function addRemesaMensual()
     {
         $lista = Cliente::all();
@@ -73,7 +108,11 @@ class Cuota extends Model
             self::addCuotaMensual($cli);
         }
     }
-
+    /**
+     * Actualiza el estado de la cuota a pagada.
+     * 
+     * @return void
+     */
     public function pagar(){
         $this->update([
             'pagada' => true,

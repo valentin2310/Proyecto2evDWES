@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Models;
 
@@ -13,6 +17,7 @@ class Cliente extends Model
     use HasFactory;
 
     protected $table = 'clientes';
+    // Campos que permitimos que sean rellenables a través de un formulario.
     protected $fillable = [
         'cif',
         'nombre',
@@ -28,6 +33,11 @@ class Cliente extends Model
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
 
+    /**
+     * Atributo que devuelve el cif en mayúsculas
+     * 
+     * @return Attribute
+     */
     protected function cif(): Attribute
     {
         return Attribute::make(
@@ -35,6 +45,11 @@ class Cliente extends Model
             set: fn (string $value) => strtoupper($value),
         );
     }
+    /**
+     * Atributo que devuelve la cuenta corriente en mayúsculas
+     * 
+     * @return Attribute
+     */
     protected function cuentaCorriente(): Attribute
     {
         return Attribute::make(
@@ -42,6 +57,12 @@ class Cliente extends Model
             set: fn (string $value) => strtoupper($value),
         );
     }
+    /**
+     * Atributo que devuelve el nombre con la primera letra en mayúscula.
+     * Guarda en la bd el nombre en minúsculas.
+     * 
+     * @return Attribute
+     */
     protected function nombre(): Attribute
     {
         return Attribute::make(
@@ -49,6 +70,12 @@ class Cliente extends Model
             set: fn (string $value) => strtolower($value),
         );
     }
+    /**
+     * Atributo que devuelve el valor de la cuota mensual con el valor de su moneda.
+     * Hace uso del helper currency_value.
+     * 
+     * @return Attribute
+     */
     protected function cuotaMensual(): Attribute
     {
         return Attribute::make(
@@ -57,24 +84,52 @@ class Cliente extends Model
             }
         );
     }
-
+    /**
+     * Relacion One to Many.
+     * Devuelva una colección con todas sus cuotas.
+     * 
+     * @return HasMany
+     */
     public function cuotas(): HasMany
     {
         return $this->hasMany(Cuota::class, 'id_cliente', 'id');
     }
+    /**
+     * Relacion One to Many.
+     * Devuelva una colección con todas sus tareas.
+     * 
+     * @return HasMany
+     */
     public function tareas(): HasMany
     {
         return $this->hasMany(Tarea::class, 'id_cliente', 'id');
     }
+    /**
+     * Relacion Many to One.
+     * Devuelve la moneda que tiene.
+     * 
+     * @return BelongsTo
+     */
     public function moneda(): BelongsTo
     {
         return $this->belongsTo(Moneda::class, 'id_moneda', 'id');
     }
+    /**
+     * Relacion Many to One.
+     * Devuelve el país al que pertenece.
+     * 
+     * @return BelongsTo
+     */
     public function pais(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'id_pais', 'id');
     }
 
+    /**
+     * Valida que el cif sea valido.
+     * 
+     * @param string $string
+     */
     public static function cifIsValid($string)
     {
         // Tipos de organización

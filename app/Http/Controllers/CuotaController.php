@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Http\Controllers;
 
@@ -15,13 +19,23 @@ use Illuminate\Support\Facades\Mail;
 
 class CuotaController extends Controller
 {
+    /**
+     * Mostrar todos las cuotas paginadas
+     * 
+     * @return mixed
+     */
     public function show()
     {
         return view('cuotas/show', [
             'cuotas' => Cuota::paginate(10)
         ]);
     }
-
+    /**
+     * Muestra la vista para crear una cuota, 
+     * con la lista de clientes y tareas para rellenar los selects
+     * 
+     * @return mixed
+     */
     public function create()
     {
         return view('cuotas/create', [
@@ -29,7 +43,12 @@ class CuotaController extends Controller
             'tareas' => Tarea::all()
         ]);
     }
-
+    /**
+     * Valida los campos del formulario
+     * Guarda la cuota en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function store(StoreCuotaRequest $request): RedirectResponse
     {
         $request->validated();
@@ -37,7 +56,12 @@ class CuotaController extends Controller
 
         return redirect()->route('cuotas.show');
     }
-
+     /**
+     * Muestra la vista con el formulario para editar la cuota,
+     * con la lista de clientes y tareas para rellenar los selects
+     * 
+     * @return mixed
+     */
     public function edit(Cuota $cuota)
     {
         return view('cuotas/edit', [
@@ -46,6 +70,12 @@ class CuotaController extends Controller
             'tareas' => Tarea::all()
         ]);
     }
+    /**
+     * Valida los campos del formulario
+     * Actualiza la cuota en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function update(StoreCuotaRequest $request, Cuota $cuota): RedirectResponse
     {
         $request->validated();
@@ -53,12 +83,21 @@ class CuotaController extends Controller
 
         return redirect()->route('cuotas.show');
     }
-
+     /**
+     * Muestra la vista de confirmación para eliminar la cuota
+     * 
+     * @return mixed
+     */
     public function delete(Cuota $cuota)
     {
         return view('cuotas/confirmacion', compact('cuota'));
     }
-
+     /**
+     * Elimina la cuota
+     * Redirige al usuario a otra vista con los resultados de la operación de eliminar.
+     * 
+     * @return RedirectResponse
+     */
     public function destroy(Cuota $cuota)
     {
         $resultado = $cuota->delete();
@@ -68,13 +107,25 @@ class CuotaController extends Controller
             'body' => $resultado ? 'La cuota se ha eliminado exitosamente.' : 'Hubo un error al eliminar la cuota'
         ]);
     }
-
+    /**
+     * Crea una remesa mensual para cada cliente
+     * Llama al modelo cuota para añadir las cuotas para cada cliente.
+     * 
+     * @return RedirectResponse
+     */
     public function remesaMensual(): RedirectResponse
     {
         Cuota::addRemesaMensual();
         return redirect()->route('cuotas.show');
     }
-
+    /**
+     * Crea un pdf con la vista de la cuota
+     * Le pasa como data la información de la cuota y el pdf
+     * Manda el correo a la dirección de correo del cliente que tiene la cuota
+     * Por último, redirige al usuairo a la página con todas las cuotas. 
+     * 
+     * @return RedirectResponse
+     */
     public function correo(Cuota $cuota)
     {
         $pdf = Pdf::loadView('cuotas.pdf', compact('cuota'));
@@ -86,7 +137,12 @@ class CuotaController extends Controller
 
         return redirect()->route('cuotas.show');
     }
-   
+    /**
+    * Genera el pdf cargando la vista de la cuota con sus datos
+    * Devuelve el stream del pdf para visualizarlo.
+    *
+    * @return mixed
+    */
     public function pdf(Cuota $cuota)
     {
         $pdf = Pdf::loadView('cuotas.pdf', compact('cuota'));

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Http\Requests;
 
@@ -16,7 +20,7 @@ class CompletarTareaRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Aplica las reglas de validación que va a aplicar sobre la request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */

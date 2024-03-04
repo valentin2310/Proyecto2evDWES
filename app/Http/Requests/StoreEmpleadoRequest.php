@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Http\Requests;
 
@@ -42,6 +46,7 @@ class StoreEmpleadoRequest extends FormRequest
 
     /**
      * Get the "after" validation callables for the request.
+     * Valida el que el nif sea válido
      */
     public function after(): array
     {

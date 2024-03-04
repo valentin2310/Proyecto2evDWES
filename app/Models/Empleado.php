@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Models;
 
@@ -15,6 +19,7 @@ class Empleado extends Authenticatable
     use HasApiTokens, HasFactory;
 
     protected $table = 'empleados';
+    // Campos que permitimos que sean rellenables a través de un formulario.
     protected $fillable = [
         'nif',
         'nombre',
@@ -43,6 +48,11 @@ class Empleado extends Authenticatable
         "OPERARIO" => 1
     ];
 
+    /**
+     * Atributo que devuelve el nif en mayúsculas
+     * 
+     * @return Attribute
+     */
     protected function nif(): Attribute
     {
         return Attribute::make(
@@ -50,6 +60,12 @@ class Empleado extends Authenticatable
             set: fn (string $value) => strtoupper($value),
         );
     }
+     /**
+     * Atributo que devuelve el nombre con la primera letra en mayúscula.
+     * Guarda en la bd el nombre en minúsculas.
+     * 
+     * @return Attribute
+     */
     protected function nombre(): Attribute
     {
         return Attribute::make(
@@ -57,17 +73,30 @@ class Empleado extends Authenticatable
             set: fn (string $value) => strtolower($value),
         );
     }
-
+    /**
+     * Relacion One to Many.
+     * Devuelva una colección con todas sus tareas.
+     * 
+     * @return HasMany
+     */
     public function tareas(): HasMany
     {
         return $this->hasMany(Tarea::class, 'id_operario', 'id');
     }
-
+    /**
+     * Devuelve una lista con todos los empleados de tipo operaro.
+     * 
+     * @return mixed
+     */
     public static function getOperarios()
     {
         return self::where('tipo', Empleado::TIPOS_USUARIOS["OPERARIO"])->get();
     }
-
+    /**
+     * Comprueba que el usuario sea de tipo administrador.
+     * 
+     * @return bool
+     */
     public function esAdmin(): Bool
     {
         return $this->tipo == self::TIPOS_USUARIOS['ADMIN'];
@@ -75,6 +104,7 @@ class Empleado extends Authenticatable
 
     /**
      * Valida que el nif tenga el formato correcto y que sea válido.
+     * 
      * @param string $string
      * @return boolean
      */

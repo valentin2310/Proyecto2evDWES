@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Http\Controllers;
 
@@ -14,6 +18,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TareaController extends Controller
 {
+     /**
+     * Mostrar todas las tareas paginadas
+     * Comprueba que si el usuario es operador, para mostrar solo las tareas que tiene asignadas.
+     * 
+     * @return mixed
+     */
     public function index()
     {
         $auth = Auth::user();
@@ -29,12 +39,21 @@ class TareaController extends Controller
             'tareas' => $tareas
         ]);
     }
-
+     /**
+     * Mostrar todos los datos de la tarea
+     * 
+     * @return mixed
+     */
     public function show(Tarea $tarea)
     {
         return view('tareas/show', compact('tarea'));
     }
-
+     /**
+     * Mostrar todos las tareas paginadas y permite filtrarlas por diferentes campos
+     * También devuelve las opciones de los campos y criterios para rellenar los selects
+     * 
+     * @return mixed
+     */
     public function search(Request $request)
     {
         if($request->query('valor1')){
@@ -54,7 +73,13 @@ class TareaController extends Controller
             'OPTIONS_CRITERIOS' => Tarea::OPTIONS_CRITERIOS,
         ]);
     }
-
+    /**
+     * Muestra la vista para crear una tarea, 
+     * con la lista de provincias, operarios y clientes para rellenar los selects.
+     * También devuelve la lista de posibles estados de la tarea.
+     * 
+     * @return mixed
+     */
     public function create()
     {
         return view('tareas/create', [
@@ -64,7 +89,12 @@ class TareaController extends Controller
             'clientes' => Cliente::all()
         ]);
     }
-
+   /**
+     * Valida los campos del formulario
+     * Guarda la tarea en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function store(StoreTareaRequest $request): RedirectResponse
     {
         $request->validated();
@@ -73,7 +103,13 @@ class TareaController extends Controller
         return redirect()->route('tareas.show', $tarea);
 
     }
-
+    /**
+     * Muestra la vista con el formulario para editar la tarea,
+     * con la lista de provincias, operarios y clientes para rellenar los selects.
+     * También devuelve la lista de posibles estados de la tarea.
+     * 
+     * @return mixed
+     */
     public function edit(Tarea $tarea)
     {
         return view('tareas/edit', [
@@ -84,7 +120,12 @@ class TareaController extends Controller
             'clientes' => Cliente::all()
         ]);
     }
-
+    /**
+     * Valida los campos del formulario
+     * Actualiza la tarea en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function update(StoreTareaRequest $request, Tarea $tarea): RedirectResponse
     {
         $request->validated();
@@ -92,7 +133,12 @@ class TareaController extends Controller
 
         return redirect()->route('tareas.show', $tarea);
     }
-
+    /**
+     * Muestra la vista con el formulario para completar la tarea.
+     * También devuelve la lista de posibles estados de la tarea.
+     * 
+     * @return mixed
+     */
     public function completar(Tarea $tarea)
     {
         return view('tareas/completar', [
@@ -100,7 +146,13 @@ class TareaController extends Controller
             'optionsEstado' => Tarea::OPTIONS_ESTADOS
         ]);
     }
-
+    /**
+     * Valida los campos del formulario
+     * Guarda los ficheros y imagenes en storage.
+     * Actualiza la tarea en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function completarUpdate(CompletarTareaRequest $request, Tarea $tarea): RedirectResponse
     {
         $request->validated();
@@ -112,12 +164,21 @@ class TareaController extends Controller
         
         return redirect()->route('tareas.show', $tarea);
     }
-
+     /**
+     * Muestra la vista de confirmación para eliminar la tarea
+     * 
+     * @return mixed
+     */
     public function delete(Tarea $tarea)
     {
         return view('tareas/confirmacion', compact('tarea'));
     }
-
+     /**
+     * Elimina la tarea.
+     * Redirige al usuario a otra vista con los resultados de la operación de eliminar.
+     * 
+     * @return RedirectResponse
+     */
     public function destroy(Tarea $tarea)
     {
         $tarea->eliminarArchivos();

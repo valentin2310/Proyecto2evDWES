@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +17,12 @@ class Moneda extends Model
 
     public $timestamps = false;
 
+    /**
+     * Relacion One to Many.
+     * Devuelva una colección con todos los clientes que tienen dicha moneda.
+     * 
+     * @return HasMany
+     */
     public function clientes(): HasMany
     {
         return $this->hasMany(Cliente::class, 'id_moneda', 'id');

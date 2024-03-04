@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Mail;
 
@@ -19,6 +23,7 @@ class SendFactura extends Mailable
 
     /**
      * Create a new message instance.
+     * Le pasamos los datos al constructor, como la cuota y el pdf
      */
     public function __construct(public $data,)
     {

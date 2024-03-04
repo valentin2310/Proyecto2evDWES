@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Http\Requests;
 
@@ -15,7 +19,6 @@ class StoreTareaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO: Solo tiene que tener permiso los Administradores y los Clientes
         return true;
     }
 
@@ -56,6 +59,7 @@ class StoreTareaRequest extends FormRequest
 
     /**
      * Get the "after" validation callables for the request.
+     * Valida que el nif sea válido.
      */
     public function after(): array
     {

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 
 namespace App\Http\Controllers;
 
@@ -11,13 +15,23 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+    /**
+     * Mostrar todos los clientes paginados
+     * 
+     * @return mixed
+     */
     public function show()
     {
         return view('clientes/show', [
             'clientes' => Cliente::paginate(10)
         ]);
     }
-
+    /**
+     * Muestra la vista para crear un cliente, 
+     * con la lista de paises y monedas para rellenar los selects
+     * 
+     * @return mixed
+     */
     public function create()
     {
         return view('clientes/create', [
@@ -25,7 +39,12 @@ class ClienteController extends Controller
             'monedas' => Moneda::all()->sortBy('name')
         ]);
     }
-
+    /**
+     * Valida los campos del formulario
+     * Guarda el cliente en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function store(StoreClienteRequest $request): RedirectResponse
     {
         $request->validated();
@@ -33,7 +52,12 @@ class ClienteController extends Controller
 
         return redirect()->route('clientes.show');
     }
-
+    /**
+     * Muestra la vista con el formulario para editar el cliente,
+     * con la lista de paises y monedas para rellenar los selects
+     * 
+     * @return mixed
+     */
     public function edit(Cliente $cliente)
     {
         return view('clientes/edit', [
@@ -42,7 +66,12 @@ class ClienteController extends Controller
             'monedas' => Moneda::all()->sortBy('name')
         ]);
     }
-
+    /**
+     * Valida los campos del formulario
+     * Actualiza el cliente en la bd
+     * 
+     * @return RedirectResponse
+     */
     public function update(StoreClienteRequest $request, Cliente $cliente): RedirectResponse
     {
         $request->validated();
@@ -50,12 +79,21 @@ class ClienteController extends Controller
 
         return redirect()->route('clientes.show');
     }
-
+    /**
+     * Muestra la vista de confirmación para eliminar el cliente
+     * 
+     * @return mixed
+     */
     public function delete(Cliente $cliente)
     {
         return view('clientes/confirmacion', compact('cliente'));
     }
-
+    /**
+     * Elimina el cliente
+     * Redirige al usuario a otra vista con los resultados de la operación de eliminar.
+     * 
+     * @return RedirectResponse
+     */
     public function destroy(Cliente $cliente)
     {
         $resultado = $cliente->delete();

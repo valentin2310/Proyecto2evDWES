@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @author Valentin Andrei Culea
+ * @version 2
+ */
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
