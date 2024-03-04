@@ -41,7 +41,7 @@
                         <td>{{ $item->nombre }}</td>
                         <td>{{ $item->correo }}</td>
                         <td>{{ $item->pais->name }}</td>
-                        <td>{{ $item->cuota_mensual }} {{ $item->moneda->symbol }}</td>
+                        <td>{{ $item->importeCurrency() }} {{ $item->moneda->symbol }}</td>
                         <td class="text-center">
                             <a href="{{ route('clientes.edit', $item->id) }}" class="text-decoration-none text-warning">
                                 <button class="btn btn-dark text-warning" title="Modificar el cliente">

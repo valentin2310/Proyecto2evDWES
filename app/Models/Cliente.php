@@ -71,18 +71,14 @@ class Cliente extends Model
         );
     }
     /**
-     * Atributo que devuelve el valor de la cuota mensual con el valor de su moneda.
+     * Devuelve el importe con el valor de la moneda del cliente.
      * Hace uso del helper currency_value.
      * 
-     * @return Attribute
+     * @return number
      */
-    protected function cuotaMensual(): Attribute
+    public function importeCurrency()
     {
-        return Attribute::make(
-            get: function($value){
-                return round((currency_value($this->moneda->code) * $value), 2);
-            }
-        );
+        return round((currency_value($this->moneda->code) * $this->cuota_mensual), 2);
     }
     /**
      * Relacion One to Many.
