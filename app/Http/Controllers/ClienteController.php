@@ -23,7 +23,7 @@ class ClienteController extends Controller
     public function show()
     {
         return view('clientes/show', [
-            'clientes' => Cliente::paginate(10)
+            'clientes' => Cliente::paginate(2)
         ]);
     }
     /**
